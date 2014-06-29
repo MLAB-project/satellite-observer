@@ -1,2 +1,0 @@
-/usr/bin/ar cr libCORE.a  CMakeFiles/CORE.dir/cEci.cpp.o CMakeFiles/CORE.dir/cJulian.cpp.o CMakeFiles/CORE.dir/cSite.cpp.o CMakeFiles/CORE.dir/cTLE.cpp.o CMakeFiles/CORE.dir/cVector.cpp.o CMakeFiles/CORE.dir/coord.cpp.o CMakeFiles/CORE.dir/globals.cpp.o CMakeFiles/CORE.dir/stdafx.cpp.o CMakeFiles/CORE.dir/cOrbit.cpp.o CMakeFiles/CORE.dir/cNoradBase.cpp.o CMakeFiles/CORE.dir/cNoradSDP4.cpp.o CMakeFiles/CORE.dir/cNoradSGP4.cpp.o
-/usr/bin/ranlib libCORE.a
