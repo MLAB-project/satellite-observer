@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/carlos/Escritorio/mlab/src/others/Satellite.h
+string
+-
+iostream
+-
+stdlib.h
+-
+iomanip
+-
+math.h
+-
+vector
+-
+
+/home/carlos/Escritorio/mlab/src/others/TLE_param.cpp
+TLE_param.h
+/home/carlos/Escritorio/mlab/src/others/TLE_param.h
+
+/home/carlos/Escritorio/mlab/src/others/TLE_param.h
+string
+-
+iostream
+-
+fstream
+-
+vector
+-
+stdlib.h
+-
+boost/lexical_cast.hpp
+-
+iomanip
+-
+Satellite.h
+/home/carlos/Escritorio/mlab/src/others/Satellite.h
+

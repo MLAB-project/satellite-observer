@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/carlos/Escritorio/mlab/src/others/Satellite.cpp
+Satellite.h
+/home/carlos/Escritorio/mlab/src/others/Satellite.h
+
+/home/carlos/Escritorio/mlab/src/others/Satellite.h
+string
+-
+iostream
+-
+stdlib.h
+-
+iomanip
+-
+math.h
+-
+vector
+-
+

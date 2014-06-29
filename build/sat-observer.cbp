@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+   <FileVersion major="1" minor="6" />
+   <Project>
+      <Option title="sat-observer" />
+      <Option makefile_is_custom="1" />
+      <Option compiler="gcc" />
+      <Option virtualFolders="CMake Files\;CMake Files\src\;CMake Files\src\others\;CMake Files\src\orbitTools\;CMake Files\src\orbitTools\core\;" />
+      <Build>
+      <Target title="all">
+         <Option working_dir="/home/carlos/Escritorio/mlab/build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 all" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="edit_cache">
+         <Option working_dir="/home/carlos/Escritorio/mlab/build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 edit_cache" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="install">
+         <Option working_dir="/home/carlos/Escritorio/mlab/build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 install" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="install/local">
+         <Option working_dir="/home/carlos/Escritorio/mlab/build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 install/local" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="install/strip">
+         <Option working_dir="/home/carlos/Escritorio/mlab/build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 install/strip" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="list_install_components">
+         <Option working_dir="/home/carlos/Escritorio/mlab/build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 list_install_components" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="rebuild_cache">
+         <Option working_dir="/home/carlos/Escritorio/mlab/build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 rebuild_cache" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="SATELLITE">
+         <Option output="/home/carlos/Escritorio/mlab/build/src/others/libSATELLITE.a" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/carlos/Escritorio/mlab/build/src/others" />
+         <Option object_output="./" />
+         <Option type="2" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/4.8" />
+            <Add directory="/usr/include/c++/4.8/backward" />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/include/x86_64-linux-gnu/c++/4.8" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed" />
+            <Add directory="/usr/local/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/others/Makefile&quot;  VERBOSE=1 SATELLITE" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/others/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/others/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/others/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="SATELLITE/fast">
+         <Option output="/home/carlos/Escritorio/mlab/build/src/others/libSATELLITE.a" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/carlos/Escritorio/mlab/build/src/others" />
+         <Option object_output="./" />
+         <Option type="2" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/4.8" />
+            <Add directory="/usr/include/c++/4.8/backward" />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/include/x86_64-linux-gnu/c++/4.8" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed" />
+            <Add directory="/usr/local/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/others/Makefile&quot;  VERBOSE=1 SATELLITE/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/others/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/others/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/others/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="TLE">
+         <Option output="/home/carlos/Escritorio/mlab/build/src/others/libTLE.a" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/carlos/Escritorio/mlab/build/src/others" />
+         <Option object_output="./" />
+         <Option type="2" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/4.8" />
+            <Add directory="/usr/include/c++/4.8/backward" />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/include/x86_64-linux-gnu/c++/4.8" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed" />
+            <Add directory="/usr/local/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/others/Makefile&quot;  VERBOSE=1 TLE" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/others/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/others/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/others/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="TLE/fast">
+         <Option output="/home/carlos/Escritorio/mlab/build/src/others/libTLE.a" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/carlos/Escritorio/mlab/build/src/others" />
+         <Option object_output="./" />
+         <Option type="2" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/4.8" />
+            <Add directory="/usr/include/c++/4.8/backward" />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/include/x86_64-linux-gnu/c++/4.8" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed" />
+            <Add directory="/usr/local/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/others/Makefile&quot;  VERBOSE=1 TLE/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/others/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/others/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/others/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="UTILITIES">
+         <Option output="/home/carlos/Escritorio/mlab/build/src/others/libUTILITIES.a" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/carlos/Escritorio/mlab/build/src/others" />
+         <Option object_output="./" />
+         <Option type="2" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/4.8" />
+            <Add directory="/usr/include/c++/4.8/backward" />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/include/x86_64-linux-gnu/c++/4.8" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed" />
+            <Add directory="/usr/local/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/others/Makefile&quot;  VERBOSE=1 UTILITIES" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/others/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/others/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/others/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="UTILITIES/fast">
+         <Option output="/home/carlos/Escritorio/mlab/build/src/others/libUTILITIES.a" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/carlos/Escritorio/mlab/build/src/others" />
+         <Option object_output="./" />
+         <Option type="2" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/4.8" />
+            <Add directory="/usr/include/c++/4.8/backward" />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/include/x86_64-linux-gnu/c++/4.8" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed" />
+            <Add directory="/usr/local/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/others/Makefile&quot;  VERBOSE=1 UTILITIES/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/others/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/others/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/others/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="CORE">
+         <Option output="/home/carlos/Escritorio/mlab/build/src/orbitTools/core/libCORE.a" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/carlos/Escritorio/mlab/build/src/orbitTools/core" />
+         <Option object_output="./" />
+         <Option type="2" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/4.8" />
+            <Add directory="/usr/include/c++/4.8/backward" />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/include/x86_64-linux-gnu/c++/4.8" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed" />
+            <Add directory="/usr/local/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/orbitTools/core/Makefile&quot;  VERBOSE=1 CORE" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/orbitTools/core/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/orbitTools/core/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/orbitTools/core/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="CORE/fast">
+         <Option output="/home/carlos/Escritorio/mlab/build/src/orbitTools/core/libCORE.a" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/carlos/Escritorio/mlab/build/src/orbitTools/core" />
+         <Option object_output="./" />
+         <Option type="2" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/4.8" />
+            <Add directory="/usr/include/c++/4.8/backward" />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/include/x86_64-linux-gnu/c++/4.8" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed" />
+            <Add directory="/usr/local/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/orbitTools/core/Makefile&quot;  VERBOSE=1 CORE/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/orbitTools/core/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/orbitTools/core/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/orbitTools/core/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="sat-observer">
+         <Option output="/home/carlos/Escritorio/mlab/build/src/sat-observer" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/carlos/Escritorio/mlab/build/src" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/home/carlos/Escritorio/mlab/src/orbitTools/core" />
+            <Add directory="/home/carlos/Escritorio/mlab/src/orbitTools/orbit" />
+            <Add directory="/home/carlos/Escritorio/mlab/src/others" />
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/4.8" />
+            <Add directory="/usr/include/c++/4.8/backward" />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/include/x86_64-linux-gnu/c++/4.8" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed" />
+            <Add directory="/usr/local/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/Makefile&quot;  VERBOSE=1 sat-observer" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="sat-observer/fast">
+         <Option output="/home/carlos/Escritorio/mlab/build/src/sat-observer" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/carlos/Escritorio/mlab/build/src" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/home/carlos/Escritorio/mlab/src/orbitTools/core" />
+            <Add directory="/home/carlos/Escritorio/mlab/src/orbitTools/orbit" />
+            <Add directory="/home/carlos/Escritorio/mlab/src/others" />
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/4.8" />
+            <Add directory="/usr/include/c++/4.8/backward" />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/include/x86_64-linux-gnu/c++/4.8" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed" />
+            <Add directory="/usr/local/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/Makefile&quot;  VERBOSE=1 sat-observer/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/carlos/Escritorio/mlab/build/src/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      </Build>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/main.cpp">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/orbitTools/core/cEci.cpp">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/orbitTools/core/cJulian.cpp">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/orbitTools/core/cNoradBase.cpp">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/orbitTools/core/cNoradSDP4.cpp">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/orbitTools/core/cNoradSGP4.cpp">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/orbitTools/core/cOrbit.cpp">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/orbitTools/core/cSite.cpp">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/orbitTools/core/cTLE.cpp">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/orbitTools/core/cVector.cpp">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/orbitTools/core/coord.cpp">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/orbitTools/core/globals.cpp">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/orbitTools/core/stdafx.cpp">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/others/Satellite.cpp">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/others/TLE_param.cpp">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/others/utilities.cpp">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/orbitTools/core/cEci.h">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/orbitTools/core/cJulian.h">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/orbitTools/core/cNoradBase.h">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/orbitTools/core/cNoradSDP4.h">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/orbitTools/core/cNoradSGP4.h">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/orbitTools/core/cOrbit.h">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/orbitTools/core/cSite.h">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/orbitTools/core/cTLE.h">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/orbitTools/core/cVector.h">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/orbitTools/core/coord.h">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/orbitTools/core/globals.h">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/orbitTools/core/stdafx.h">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/others/Satellite.h">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/others/TLE_param.h">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/others/utilities.h">
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\" />
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\src\" />
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/others/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\src\others\" />
+      </Unit>
+      <Unit filename="/home/carlos/Escritorio/mlab/src/orbitTools/core/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\src\orbitTools\core\" />
+      </Unit>
+   </Project>
+</CodeBlocks_project_file>

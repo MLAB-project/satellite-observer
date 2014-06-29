@@ -1,0 +1,6 @@
+ADD_LIBRARY(TLE TLE_param)
+ADD_LIBRARY(SATELLITE Satellite)
+ADD_LIBRARY(UTILITIES utilities)
+
+
+

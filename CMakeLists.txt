@@ -1,0 +1,7 @@
+PROJECT(sat-observer)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+ 
+ADD_SUBDIRECTORY(src/others)
+ADD_SUBDIRECTORY(src/orbitTools/core)
+#ADD_SUBDIRECTORY(src/orbitTools/orbit)
+ADD_SUBDIRECTORY(src)
