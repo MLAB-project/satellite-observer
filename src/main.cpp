@@ -149,7 +149,8 @@ int main(int argc, char *argv[]){
     struct tm * ptm;
     std::time(&timer);  /* get current time; same as: timer = time(NULL)  */
     double UTC=3600*(std::atof(pt.get<std::string>("TIME.Hour").c_str()));
-
+    
+    cout << "Epoch (UTC): " << ctime (&rawtime) << "\n";
     cout << "Current time: " << ctime (&timer) << "\n";
     timer=timer-UTC;
     cout << "Current UTC time: " << ctime (&timer) << "\n";
@@ -181,7 +182,7 @@ int main(int argc, char *argv[]){
 
 
     // Calculate position, velocity
-    for (double mpe = d; (mpe <=d+9999999999999999) && (aos!=8); mpe=mpe+0.0016){
+    for (double mpe = d; (mpe <=d+9999999999999999) && (aos!=6); mpe=mpe+0.0016){
         // Get the position of the satellite at time "mpe"
         Zeptomoby::OrbitTools::cEciTime eci = orbit.GetPosition(mpe);
         Zeptomoby::OrbitTools::cSite siteEquator(std::atof(pt.get<std::string>("POSITION.Lat").c_str()),std::atof(pt.get<std::string>("POSITION.Long").c_str()),std::atof(pt.get<std::string>("POSITION.Hight").c_str())); // 0.00 N, 100.00 W, 0 km altitude
@@ -191,7 +192,6 @@ int main(int argc, char *argv[]){
         elevation1=topoLook.ElevationDeg();
         azimuth1=topoLook.AzimuthDeg();
         //std::cout << "Elevation: " << topoLook.ElevationDeg() << " " << "Azimuth: "<< topoLook.AzimuthDeg() <<"\n";
-        //std::cout << "Mpe " << mpe-d <<"\n";
 
         if(elevation0==9999){
             elevation0=elevation1;
@@ -201,6 +201,7 @@ int main(int argc, char *argv[]){
         if((elevation0<0 && elevation1>0) || (elevation0>0 && elevation1<0)){
             if(elevation0<0 && elevation1>0){
                 std::cout << "\n\n*****************************************************\n";
+
                 t_AOS.tm_year = date[0] -1900;
                 t_AOS.tm_mon = date[1]- 1;
                 t_AOS.tm_mday = date[2];
@@ -210,7 +211,7 @@ int main(int argc, char *argv[]){
                 time.tm_isdst = -1;
                 tt_AOS = mktime(&t_AOS);
 
-                tt_AOS=tt_AOS+(mpe-20)*60+UTC;
+                tt_AOS=tt_AOS+(mpe)*60+UTC;
                 std::cout << "+++ AOS: " << ctime (&tt_AOS) << "||||" << "Elevation: " << topoLook.ElevationDeg() << " " << "Azimuth: "<< topoLook.AzimuthDeg() <<"\n";
                 ++aos;
                 std::cout << "-----------------------------------------------------\n";
@@ -225,7 +226,7 @@ int main(int argc, char *argv[]){
                 time.tm_isdst = -1;
                 tt_LOS = mktime(&t_LOS);
 
-                tt_LOS=tt_LOS+(mpe-20)*60+UTC;
+                tt_LOS=tt_LOS+(mpe)*60+UTC;
                 std::cout << "+++ LOS: " << ctime (&tt_LOS) << "||||" << "Elevation: " << topoLook.ElevationDeg() << " " << "Azimuth: "<< topoLook.AzimuthDeg() <<"\n";
                 std::cout << "*****************************************************\n";
                 ++aos;
