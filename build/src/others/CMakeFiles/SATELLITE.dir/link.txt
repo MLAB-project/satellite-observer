@@ -1,0 +1,2 @@
+/usr/bin/ar cr libSATELLITE.a  CMakeFiles/SATELLITE.dir/Satellite.cpp.o
+/usr/bin/ranlib libSATELLITE.a
