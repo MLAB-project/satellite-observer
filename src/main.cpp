@@ -43,6 +43,22 @@ int main(int argc, char *argv[]){
     double min_AOS;
     double min_LOS;
 
+    float x0;
+    float y0;
+    float z0;
+
+    float x1;
+    float y1;
+    float y2;
+
+    float sx;
+    float sy;
+    float sz;
+
+    float v;
+
+
+
     //Config file path.
     if(argc>=2){
         file = argv[1];
@@ -124,7 +140,6 @@ int main(int argc, char *argv[]){
     const Zeptomoby::OrbitTools::cTle tl(sat->line0,sat->line1,sat->line2);
 
     Zeptomoby::OrbitTools::cOrbit orbit(tl);
-    std::vector<Zeptomoby::OrbitTools::cEci> Pos;
 
    int epochYear = (int)tl.GetField(Zeptomoby::OrbitTools::cTle::FLD_EPOCHYEAR);
    int days= (int)tl.GetField(Zeptomoby::OrbitTools::cTle::FLD_EPOCHDAY );
@@ -149,7 +164,7 @@ int main(int argc, char *argv[]){
     struct tm * ptm;
     std::time(&timer);  /* get current time; same as: timer = time(NULL)  */
     double UTC=3600*(std::atof(pt.get<std::string>("TIME.Hour").c_str()));
-    
+
     cout << "Epoch (UTC): " << ctime (&rawtime) << "\n";
     cout << "Current time: " << ctime (&timer) << "\n";
     timer=timer-UTC;
@@ -157,7 +172,7 @@ int main(int argc, char *argv[]){
     double d = std::difftime(timer,rawtime);
     d=d/60;
 
-
+    time_t UTC_timer=timer+UTC;
 
     struct tm t_AOS;
     t_AOS.tm_year = date[0] -1900;
@@ -180,13 +195,40 @@ int main(int argc, char *argv[]){
     time.tm_isdst = -1;
     time_t tt_LOS = mktime(&t_LOS);
 
-
+    float control=0;
     // Calculate position, velocity
     for (double mpe = d; (mpe <=d+9999999999999999) && (aos!=6); mpe=mpe+0.0016){
         // Get the position of the satellite at time "mpe"
         Zeptomoby::OrbitTools::cEciTime eci = orbit.GetPosition(mpe);
-        Zeptomoby::OrbitTools::cSite siteEquator(std::atof(pt.get<std::string>("POSITION.Lat").c_str()),std::atof(pt.get<std::string>("POSITION.Long").c_str()),std::atof(pt.get<std::string>("POSITION.Hight").c_str())); // 0.00 N, 100.00 W, 0 km altitude
+        Zeptomoby::OrbitTools::cSite siteEquator(std::atof(pt.get<std::string>("POSITION.Lat").c_str()),std::atof(pt.get<std::string>("POSITION.Long").c_str()),std::atof(pt.get<std::string>("POSITION.Hight").c_str()));
         Zeptomoby::OrbitTools::cTopo topoLook = siteEquator.GetLookAngle(eci);
+
+        if(control==0 && mpe==d){
+            Zeptomoby::OrbitTools::cJulian j(UTC_timer);
+            float velocity_vector[3]={eci.Velocity().m_x,eci.Velocity().m_y,eci.Velocity().m_z};
+            float station_vector[3]={siteEquator.GetPosition(j).Position().m_x - eci.Position().m_x,
+                siteEquator.GetPosition(j).Position().m_y - eci.Position().m_y,
+                siteEquator.GetPosition(j).Position().m_z - eci.Position().m_z};
+
+            float velocity=sqrt(velocity_vector[0]*velocity_vector[0]+velocity_vector[1]*velocity_vector[1]+velocity_vector[2]*velocity_vector[2]);
+
+            float cos_angle = velocity_vector[0]*station_vector[0]+velocity_vector[1]*station_vector[1]+velocity_vector[2]*station_vector[2];
+            float cos_angle1 = sqrt(velocity_vector[0]*velocity_vector[0]+velocity_vector[1]*velocity_vector[1]+velocity_vector[2]*velocity_vector[2]);
+            float cos_angle2 = sqrt(station_vector[0]*station_vector[0]+station_vector[1]*station_vector[1]+station_vector[2]*station_vector[2]);
+            cos_angle=cos_angle/(cos_angle1*cos_angle2);
+            float doppler=100000000*((velocity*1000*cos_angle)/299792458);
+
+            std::cout << "Velocity: " << velocity << "\n";
+
+
+            std::cout << "Current doppler to 100MHz: " << doppler << "\n";
+
+
+        //std::cout << "Elevation: " << topoLook.ElevationDeg() << " " << "Azimuth: "<< topoLook.AzimuthDeg() <<"\n";
+
+            ++control;
+        }
+
 
         elevation0=elevation1;
         elevation1=topoLook.ElevationDeg();
@@ -205,6 +247,7 @@ int main(int argc, char *argv[]){
                 t_AOS.tm_year = date[0] -1900;
                 t_AOS.tm_mon = date[1]- 1;
                 t_AOS.tm_mday = date[2];
+
                 t_AOS.tm_hour = date[3];
                 t_AOS.tm_min  = date[4];
                 t_AOS.tm_sec  = date[5];
