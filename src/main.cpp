@@ -208,9 +208,7 @@ int main(int argc, char *argv[]){
         elevation0=elevation1;
         elevation1=topoLook.ElevationDeg();
         azimuth1=topoLook.AzimuthDeg();
-        if(mpe==d){
-            std::cout << "Elevation: " << topoLook.ElevationDeg() << " " << "Azimuth: "<< topoLook.AzimuthDeg() <<"\n";
-        }
+
         if(elevation0==9999){
             elevation0=elevation1;
             azimuth0=azimuth1;
@@ -219,9 +217,6 @@ int main(int argc, char *argv[]){
         if((elevation0<0 && elevation1>0) || (elevation0>0 && elevation1<0)){
             if(elevation0<0 && elevation1>0){
                 std::cout << "\n\n*****************************************************\n";
-
-                std::cout << "minutos" << mpe << "\n";
-
 
 
                 t_AOS.tm_year = date[0] -1900;
@@ -283,6 +278,9 @@ int main(int argc, char *argv[]){
         siteEquator.GetPosition(j).Position().m_y - eci2.Position().m_y,
         siteEquator.GetPosition(j).Position().m_z - eci2.Position().m_z};
 
+        Zeptomoby::OrbitTools::cTopo topoLook2 = siteEquator.GetLookAngle(eci2);
+
+
         float velocity=sqrt(velocity_vector[0]*velocity_vector[0]+velocity_vector[1]*velocity_vector[1]+velocity_vector[2]*velocity_vector[2]);
 
         float cos_angle = velocity_vector[0]*station_vector[0]+velocity_vector[1]*station_vector[1]+velocity_vector[2]*station_vector[2];
@@ -298,7 +296,7 @@ int main(int argc, char *argv[]){
 
          std::cout << setprecision(12);
          double f=100000000.0000000000 + (double)doppler;
-         cout << "Current frequency (with doppler) to 100Mhz: " << f << "Hz\r" << flush;
+         cout << "Elevation: " << topoLook2.ElevationDeg() << " " << "Azimuth: "<< topoLook2.AzimuthDeg() << " " << "Current frequency (with doppler) to 100Mhz: " << f << "Hz\r" << flush;
     }
 
 
