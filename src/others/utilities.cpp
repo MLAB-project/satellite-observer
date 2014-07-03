@@ -47,12 +47,13 @@ void tleEpochToDate(int epochYear,int days,double s,double* date){
         epochYear+=1900;
     }
 
-
+    //January
     if(days>0){
         days=days-31;
         addDays=31;
         ++epochMonth;
     }
+    //February
     if(days>0){
         if((epochYear % 4 == 0 && epochYear % 100 != 0) || epochYear % 400 == 0){
             days=days-29;
@@ -64,47 +65,68 @@ void tleEpochToDate(int epochYear,int days,double s,double* date){
         }
         ++epochMonth;
     }
+    //March
     if(days>0){
         days=days-31;
         addDays=31;
         ++epochMonth;
     }
+    //April
     if(days>0){
         days=days-30;
         addDays=30;
         ++epochMonth;
     }
+    //May
     if(days>0){
         days=days-31;
         addDays=31;
         ++epochMonth;
     }
-    if(days>0){
-        days=days-31;
-        addDays=31;
-        ++epochMonth;
-    }
+    //June
     if(days>0){
         days=days-30;
         addDays=30;
         ++epochMonth;
     }
+    //July
     if(days>0){
         days=days-31;
         addDays=31;
         ++epochMonth;
     }
+    //August
+    if(days>0){
+        days=days-31;
+        addDays=31;
+        ++epochMonth;
+    }
+    //September
     if(days>0){
         days=days-30;
         addDays=30;
         ++epochMonth;
     }
+    //October
+    if(days>0){
+        days=days-31;
+        addDays=31;
+        ++epochMonth;
+    }
+    //November
+    if(days>0){
+        days=days-30;
+        addDays=30;
+        ++epochMonth;
+    }
+    //December
     if(days>0){
         days=days-31;
         addDays=31;
         ++epochMonth;
     }
     epochDay=days+addDays;
+
 
    for(;secondsofday>0;secondsofday=secondsofday-3600){
         ++epochHour;

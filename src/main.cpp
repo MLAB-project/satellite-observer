@@ -196,45 +196,21 @@ int main(int argc, char *argv[]){
     time_t tt_LOS = mktime(&t_LOS);
 
     float control=0;
+    int seconds=0;
+    Zeptomoby::OrbitTools::cSite siteEquator(std::atof(pt.get<std::string>("POSITION.Lat").c_str()),std::atof(pt.get<std::string>("POSITION.Long").c_str()),std::atof(pt.get<std::string>("POSITION.Hight").c_str()));
     // Calculate position, velocity
-    for (double mpe = d; (mpe <=d+9999999999999999) && (aos!=6); mpe=mpe+0.0016){
+    for (double mpe = d; (mpe <=d+9999999999999999) && (aos!=4); mpe=mpe+0.01, ++seconds){
         // Get the position of the satellite at time "mpe"
         Zeptomoby::OrbitTools::cEciTime eci = orbit.GetPosition(mpe);
-        Zeptomoby::OrbitTools::cSite siteEquator(std::atof(pt.get<std::string>("POSITION.Lat").c_str()),std::atof(pt.get<std::string>("POSITION.Long").c_str()),std::atof(pt.get<std::string>("POSITION.Hight").c_str()));
         Zeptomoby::OrbitTools::cTopo topoLook = siteEquator.GetLookAngle(eci);
-
-        if(control==0 && mpe==d){
-            Zeptomoby::OrbitTools::cJulian j(UTC_timer);
-            float velocity_vector[3]={eci.Velocity().m_x,eci.Velocity().m_y,eci.Velocity().m_z};
-            float station_vector[3]={siteEquator.GetPosition(j).Position().m_x - eci.Position().m_x,
-                siteEquator.GetPosition(j).Position().m_y - eci.Position().m_y,
-                siteEquator.GetPosition(j).Position().m_z - eci.Position().m_z};
-
-            float velocity=sqrt(velocity_vector[0]*velocity_vector[0]+velocity_vector[1]*velocity_vector[1]+velocity_vector[2]*velocity_vector[2]);
-
-            float cos_angle = velocity_vector[0]*station_vector[0]+velocity_vector[1]*station_vector[1]+velocity_vector[2]*station_vector[2];
-            float cos_angle1 = sqrt(velocity_vector[0]*velocity_vector[0]+velocity_vector[1]*velocity_vector[1]+velocity_vector[2]*velocity_vector[2]);
-            float cos_angle2 = sqrt(station_vector[0]*station_vector[0]+station_vector[1]*station_vector[1]+station_vector[2]*station_vector[2]);
-            cos_angle=cos_angle/(cos_angle1*cos_angle2);
-            float doppler=100000000*((velocity*1000*cos_angle)/299792458);
-
-            std::cout << "Velocity: " << velocity << "\n";
-
-
-            std::cout << "Current doppler to 100MHz: " << doppler << "\n";
-
-
-        //std::cout << "Elevation: " << topoLook.ElevationDeg() << " " << "Azimuth: "<< topoLook.AzimuthDeg() <<"\n";
-
-            ++control;
-        }
 
 
         elevation0=elevation1;
         elevation1=topoLook.ElevationDeg();
         azimuth1=topoLook.AzimuthDeg();
-        //std::cout << "Elevation: " << topoLook.ElevationDeg() << " " << "Azimuth: "<< topoLook.AzimuthDeg() <<"\n";
-
+        if(mpe==d){
+            std::cout << "Elevation: " << topoLook.ElevationDeg() << " " << "Azimuth: "<< topoLook.AzimuthDeg() <<"\n";
+        }
         if(elevation0==9999){
             elevation0=elevation1;
             azimuth0=azimuth1;
@@ -243,6 +219,10 @@ int main(int argc, char *argv[]){
         if((elevation0<0 && elevation1>0) || (elevation0>0 && elevation1<0)){
             if(elevation0<0 && elevation1>0){
                 std::cout << "\n\n*****************************************************\n";
+
+                std::cout << "minutos" << mpe << "\n";
+
+
 
                 t_AOS.tm_year = date[0] -1900;
                 t_AOS.tm_mon = date[1]- 1;
@@ -276,6 +256,51 @@ int main(int argc, char *argv[]){
             }
         }
    }
+
+    std::cout << "\n\n";
+
+    std::time(&timer);  /* get current time; same as: timer = time(NULL)  */
+    UTC=3600*(std::atof(pt.get<std::string>("TIME.Hour").c_str()));
+    timer=timer-UTC;
+    d = std::difftime(timer,rawtime);
+    d=d/60;
+    double m=d;
+
+    while(true){
+        std::time(&timer);  /* get current time; same as: timer = time(NULL)  */
+        UTC=3600*(std::atof(pt.get<std::string>("TIME.Hour").c_str()));
+
+        timer=timer-UTC;
+        d = std::difftime(timer,rawtime);
+        d=d/60;
+        m=d;
+
+        Zeptomoby::OrbitTools::cEciTime eci2 = orbit.GetPosition(m);
+
+        Zeptomoby::OrbitTools::cJulian j(UTC_timer);
+        float velocity_vector[3]={eci2.Velocity().m_x,eci2.Velocity().m_y,eci2.Velocity().m_z};
+        float station_vector[3]={siteEquator.GetPosition(j).Position().m_x - eci2.Position().m_x,
+        siteEquator.GetPosition(j).Position().m_y - eci2.Position().m_y,
+        siteEquator.GetPosition(j).Position().m_z - eci2.Position().m_z};
+
+        float velocity=sqrt(velocity_vector[0]*velocity_vector[0]+velocity_vector[1]*velocity_vector[1]+velocity_vector[2]*velocity_vector[2]);
+
+        float cos_angle = velocity_vector[0]*station_vector[0]+velocity_vector[1]*station_vector[1]+velocity_vector[2]*station_vector[2];
+        float cos_angle1 = sqrt(velocity_vector[0]*velocity_vector[0]+velocity_vector[1]*velocity_vector[1]+velocity_vector[2]*velocity_vector[2]);
+        float cos_angle2 = sqrt(station_vector[0]*station_vector[0]+station_vector[1]*station_vector[1]+station_vector[2]*station_vector[2]);
+        cos_angle=cos_angle/(cos_angle1*cos_angle2);
+        float doppler=100000000*((velocity*1000*cos_angle)/299792458);
+
+        //std::cout << "Velocity: " << velocity << "\n";
+
+
+        //std::cout << "Elevation: " << topoLook.ElevationDeg() << " " << "Azimuth: "<< topoLook.AzimuthDeg() <<"\n";
+
+         std::cout << setprecision(12);
+         double f=100000000.0000000000 + (double)doppler;
+         cout << "Current frequency (with doppler) to 100Mhz: " << f << "Hz\r" << flush;
+    }
+
 
 
     return 0;
