@@ -24,6 +24,8 @@
 
 #include "utilities.h"
 
+#include <signal.h>
+
 
 inline bool exists(const std::string&);
 
@@ -269,7 +271,11 @@ int main(int argc, char *argv[]){
         aos=0;
 
 
+
+
         int endd=0;
+        int first=0;
+        int pid=-1;
 
         while(endd<2){
             //Current time
@@ -278,15 +284,27 @@ int main(int argc, char *argv[]){
             UTC=3600*(std::atof(pt.get<std::string>("TIME.Hour").c_str()));
             timer=timer-UTC;
 
-            //Capture signal
-            if(std::difftime(tt_AOS,timer)<=0){
-                system("arecord -D hw:1,0 -v -f dat -t wav -c2 ./sample.wav");
-                std::cout << "Cathching...m\n";
+            if(first==0){
+                pid = fork();
+                first=1;
             }
-            //End capture
-            if(std::difftime(tt_LOS,timer)<=0){
-                system("killall arecord");
-                std::cout << "End to the capture.\n\n\n";
+            switch(pid){
+                case -1:
+                    std::cout << "Error\n";
+                break;
+                case 0:
+                    //Start capture
+                    if(std::difftime(tt_AOS,timer)<=0){
+                        std::cout << "Cathching...m\n";
+                        system("arecord -D hw:1,0 -v -f dat -t wav -c2 ./sample.wav &");
+                    }
+                break;
+                default:
+                    //End capture
+                    if(std::difftime(tt_LOS,timer)<=0){
+                        kill (pid, SIGINT);
+                        std::cout << "End to the capture.\n\n\n";
+                    }
             }
         }
     }
