@@ -282,7 +282,7 @@ int main(int argc, char *argv[]){
             std::time(&timer);  /* get current time; same as: timer = time(NULL)  */
             //Current time to UTC time
             UTC=3600*(std::atof(pt.get<std::string>("TIME.Hour").c_str()));
-            timer=timer-UTC+99999999;
+            timer=timer-UTC;
 
             switch(pid){
                 case -1:
