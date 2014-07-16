@@ -275,35 +275,33 @@ int main(int argc, char *argv[]){
 
         int endd=0;
         int first=0;
-        int pid=-1;
+        int pid = fork();
 
-        while(endd<2){
+        while(endd<1){
             //Current time
             std::time(&timer);  /* get current time; same as: timer = time(NULL)  */
             //Current time to UTC time
             UTC=3600*(std::atof(pt.get<std::string>("TIME.Hour").c_str()));
-            timer=timer-UTC;
+            timer=timer-UTC+99999999;
 
-            if(first==0){
-                pid = fork();
-                first=1;
-            }
             switch(pid){
                 case -1:
                     std::cout << "Error\n";
                 break;
                 case 0:
                     //Start capture
-                    if(std::difftime(tt_AOS,timer)<=0){
-                        std::cout << "Cathching...m\n";
-                        system("arecord -D hw:1,0 -v -f dat -t wav -c2 ./sample.wav &");
+                    if(std::difftime(tt_AOS,timer)<=0 && first==0){
+                        std::cout << "Catching...\n";
+                        system("arecord -D hw:1,0 -v -f dat -t wav -c2 ./sample.wav");
+                        first=1;
                     }
                 break;
                 default:
                     //End capture
                     if(std::difftime(tt_LOS,timer)<=0){
                         kill (pid, SIGINT);
-                        std::cout << "End to the capture.\n\n\n";
+                        std::cout << "End of the capture.\n\n\n";
+                        ++endd;
                     }
             }
         }
