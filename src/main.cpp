@@ -145,9 +145,9 @@ int main(int argc, char *argv[]){
    int days= (int)tl.GetField(Zeptomoby::OrbitTools::cTle::FLD_EPOCHDAY );
    double fraction  = (tl.GetField(Zeptomoby::OrbitTools::cTle::FLD_EPOCHDAY)-days);
 
+    //Epoch of Kepler parameters
     double date[6];
     tleEpochToDate(epochYear,days,fraction,date);
-
     struct tm time;
     time.tm_year = date[0] -1900;
     time.tm_mon = date[1]- 1;
@@ -156,24 +156,11 @@ int main(int argc, char *argv[]){
     time.tm_min  = date[4];
     time.tm_sec  = date[5];
     time.tm_isdst = -1;
-
     time_t rawtime = mktime (&time);
-
-
-    time_t timer;
-    struct tm * ptm;
-    std::time(&timer);  /* get current time; same as: timer = time(NULL)  */
-    double UTC=3600*(std::atof(pt.get<std::string>("TIME.Hour").c_str()));
-
     cout << "Epoch (UTC): " << ctime (&rawtime) << "\n";
-    cout << "Current time: " << ctime (&timer) << "\n";
-    timer=timer-UTC;
-    cout << "Current UTC time: " << ctime (&timer) << "\n";
-    double d = std::difftime(timer,rawtime);
-    d=d/60;
 
-    time_t UTC_timer=timer+UTC;
 
+    //AOS time
     struct tm t_AOS;
     t_AOS.tm_year = date[0] -1900;
     t_AOS.tm_mon = date[1]- 1;
@@ -184,7 +171,7 @@ int main(int argc, char *argv[]){
     time.tm_isdst = -1;
     time_t tt_AOS = mktime(&t_AOS);
 
-
+    //LOS time
     struct tm t_LOS;
     t_LOS.tm_year = date[0] -1900;
     t_LOS.tm_mon = date[1]- 1;
@@ -195,67 +182,129 @@ int main(int argc, char *argv[]){
     time.tm_isdst = -1;
     time_t tt_LOS = mktime(&t_LOS);
 
-    float control=0;
-    int seconds=0;
-    Zeptomoby::OrbitTools::cSite siteEquator(std::atof(pt.get<std::string>("POSITION.Lat").c_str()),std::atof(pt.get<std::string>("POSITION.Long").c_str()),std::atof(pt.get<std::string>("POSITION.Hight").c_str()));
-    // Calculate position, velocity
-    for (double mpe = d; (mpe <=d+9999999999999999) && (aos!=4); mpe=mpe+0.01, ++seconds){
-        // Get the position of the satellite at time "mpe"
-        Zeptomoby::OrbitTools::cEciTime eci = orbit.GetPosition(mpe);
-        Zeptomoby::OrbitTools::cTopo topoLook = siteEquator.GetLookAngle(eci);
+
+    while(true){
+
+        //Current time
+        time_t timer;
+        struct tm * ptm;
+        std::time(&timer);  /* get current time; same as: timer = time(NULL)  */
+        cout << "Current time: " << ctime (&timer) << "\n";
+
+        //Current time to UTC time
+        double UTC=3600*(std::atof(pt.get<std::string>("TIME.Hour").c_str()));
+        timer=timer-UTC;
+        cout << "Current UTC time: " << ctime (&timer) << "\n";
+
+        //Elapsed time since epoch (seconds)
+        double d = std::difftime(timer,rawtime);
+        //Elapsed time since epoch (minutes)
+        d=d/60;
+        time_t UTC_timer=timer+UTC;
 
 
-        elevation0=elevation1;
-        elevation1=topoLook.ElevationDeg();
-        azimuth1=topoLook.AzimuthDeg();
+        int seconds=0;
+        Zeptomoby::OrbitTools::cSite siteEquator(std::atof(pt.get<std::string>("POSITION.Lat").c_str()),std::atof(pt.get<std::string>("POSITION.Long").c_str()),std::atof(pt.get<std::string>("POSITION.Hight").c_str()));
 
-        if(elevation0==9999){
+
+
+
+        // Calculate the next AOS and LOS
+        for (double mpe = d; (mpe <=d+9999999999999999) && (aos!=2); mpe=mpe+0.0166666, ++seconds){
+            // Get the position of the satellite at time "mpe"
+            Zeptomoby::OrbitTools::cEciTime eci = orbit.GetPosition(mpe);
+            Zeptomoby::OrbitTools::cTopo topoLook = siteEquator.GetLookAngle(eci);
+
+
             elevation0=elevation1;
-            azimuth0=azimuth1;
-        }
+            elevation1=topoLook.ElevationDeg();
+            azimuth1=topoLook.AzimuthDeg();
 
-        if((elevation0<0 && elevation1>0) || (elevation0>0 && elevation1<0)){
-            if(elevation0<0 && elevation1>0){
-                std::cout << "\n\n*****************************************************\n";
-
-
-                t_AOS.tm_year = date[0] -1900;
-                t_AOS.tm_mon = date[1]- 1;
-                t_AOS.tm_mday = date[2];
-
-                t_AOS.tm_hour = date[3];
-                t_AOS.tm_min  = date[4];
-                t_AOS.tm_sec  = date[5];
-                time.tm_isdst = -1;
-                tt_AOS = mktime(&t_AOS);
-
-                tt_AOS=tt_AOS+(mpe)*60+UTC;
-                std::cout << "+++ AOS: " << ctime (&tt_AOS) << "||||" << "Elevation: " << topoLook.ElevationDeg() << " " << "Azimuth: "<< topoLook.AzimuthDeg() <<"\n";
-                ++aos;
-                std::cout << "-----------------------------------------------------\n";
+            if(elevation0==9999){
+                elevation0=elevation1;
+                azimuth0=azimuth1;
             }
-            else{
-                t_LOS.tm_year = date[0] -1900;
-                t_LOS.tm_mon = date[1]- 1;
-                t_LOS.tm_mday = date[2];
-                t_LOS.tm_hour = date[3];
-                t_LOS.tm_min  = date[4];
-                t_LOS.tm_sec  = date[5];
-                time.tm_isdst = -1;
-                tt_LOS = mktime(&t_LOS);
 
-                tt_LOS=tt_LOS+(mpe)*60+UTC;
-                std::cout << "+++ LOS: " << ctime (&tt_LOS) << "||||" << "Elevation: " << topoLook.ElevationDeg() << " " << "Azimuth: "<< topoLook.AzimuthDeg() <<"\n";
-                std::cout << "*****************************************************\n";
-                ++aos;
+            if((elevation0<0 && elevation1>0) || (elevation0>0 && elevation1<0)){
+                if(elevation0<0 && elevation1>0){
+                    std::cout << "\n\n**************  NEXT CAPTURE ************************\n";
+
+
+                    t_AOS.tm_year = date[0] -1900;
+                    t_AOS.tm_mon = date[1]- 1;
+                    t_AOS.tm_mday = date[2];
+
+                    t_AOS.tm_hour = date[3];
+                    t_AOS.tm_min  = date[4];
+                    t_AOS.tm_sec  = date[5];
+                    time.tm_isdst = -1;
+                    tt_AOS = mktime(&t_AOS);
+
+                    tt_AOS=tt_AOS+(mpe)*60;
+                    tt_AOS=tt_AOS+std::atof(pt.get<std::string>("CAPTURE.Start").c_str());
+
+                    std::cout << "+++ AOS (UTC): " << ctime (&tt_AOS) << "||||" << "Elevation: " << topoLook.ElevationDeg() << " " << "Azimuth: "<< topoLook.AzimuthDeg() <<"\n";
+                    ++aos;
+                    std::cout << "-----------------------------------------------------\n";
+                }
+                else{
+                    t_LOS.tm_year = date[0] -1900;
+                    t_LOS.tm_mon = date[1]- 1;
+                    t_LOS.tm_mday = date[2];
+                    t_LOS.tm_hour = date[3];
+                    t_LOS.tm_min  = date[4];
+                    t_LOS.tm_sec  = date[5];
+                    time.tm_isdst = -1;
+                    tt_LOS = mktime(&t_LOS);
+                    tt_LOS=tt_LOS+std::atof(pt.get<std::string>("CAPTURE.End").c_str());
+
+                    tt_LOS=tt_LOS+(mpe)*60;
+                    std::cout << "+++ LOS (UTC): " << ctime (&tt_LOS) << "||||" << "Elevation: " << topoLook.ElevationDeg() << " " << "Azimuth: "<< topoLook.AzimuthDeg() <<"\n";
+                    std::cout << "*****************************************************\n";
+                    ++aos;
+                }
             }
         }
-   }
+        elevation0=9999;
+        aos=0;
+
+
+        int endd=0;
+
+        while(endd<2){
+            //Current time
+            std::time(&timer);  /* get current time; same as: timer = time(NULL)  */
+            //Current time to UTC time
+            UTC=3600*(std::atof(pt.get<std::string>("TIME.Hour").c_str()));
+            timer=timer-UTC;
+
+            //Capture signal
+            if(std::difftime(tt_AOS,timer)<=0){
+                system("arecord -D hw:1,0 -v -f dat -t wav -c2 ./sample.wav");
+                std::cout << "Cathching...m\n";
+            }
+            //End capture
+            if(std::difftime(tt_LOS,timer)<=0){
+                system("killall arecord");
+                std::cout << "End to the capture.\n\n\n";
+            }
+        }
+    }
+
+
+
+
+
+
+/*
+
+
+
 
     std::cout << "\n\n";
 
     std::time(&timer);  /* get current time; same as: timer = time(NULL)  */
-    UTC=3600*(std::atof(pt.get<std::string>("TIME.Hour").c_str()));
+  /*  UTC=3600*(std::atof(pt.get<std::string>("TIME.Hour").c_str()));
     timer=timer-UTC;
     d = std::difftime(timer,rawtime);
     d=d/60;
@@ -263,7 +312,7 @@ int main(int argc, char *argv[]){
 
     while(true){
         std::time(&timer);  /* get current time; same as: timer = time(NULL)  */
-        UTC=3600*(std::atof(pt.get<std::string>("TIME.Hour").c_str()));
+  /*      UTC=3600*(std::atof(pt.get<std::string>("TIME.Hour").c_str()));
 
         timer=timer-UTC;
         d = std::difftime(timer,rawtime);
@@ -298,7 +347,7 @@ int main(int argc, char *argv[]){
          double f=100000000.0000000000 + (double)doppler;
          cout << "Elevation: " << topoLook2.ElevationDeg() << " " << "Azimuth: "<< topoLook2.AzimuthDeg() << " " << "Current frequency (with doppler) to 100Mhz: " << f << "Hz\r" << flush;
     }
-
+*/
 
 
     return 0;
