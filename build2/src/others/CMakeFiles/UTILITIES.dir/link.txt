@@ -1,0 +1,2 @@
+/usr/bin/ar cr libUTILITIES.a  CMakeFiles/UTILITIES.dir/utilities.cpp.o
+/usr/bin/ranlib libUTILITIES.a

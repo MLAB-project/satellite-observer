@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/carlos/Escritorio/mlab/src/others/utilities.cpp
+utilities.h
+/home/carlos/Escritorio/mlab/src/others/utilities.h
+
+/home/carlos/Escritorio/mlab/src/others/utilities.h
+iostream
+-
+vector
+-
+math.h
+-
+

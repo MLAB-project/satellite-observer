@@ -1,0 +1,5 @@
+/home/carlos/Escritorio/mlab/build2/src/orbitTools/core/CMakeFiles/CORE.dir
+/home/carlos/Escritorio/mlab/build2/src/others/CMakeFiles/SATELLITE.dir
+/home/carlos/Escritorio/mlab/build2/src/others/CMakeFiles/TLE.dir
+/home/carlos/Escritorio/mlab/build2/src/others/CMakeFiles/UTILITIES.dir
+/home/carlos/Escritorio/mlab/build2/src/CMakeFiles/sat-observer.dir

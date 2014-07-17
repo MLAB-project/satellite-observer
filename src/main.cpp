@@ -17,6 +17,7 @@
 #include <time.h>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
+#include <stdlib.h>
 
 #include "boost/date_time/posix_time/posix_time.hpp"
 #include "boost/date_time/local_time_adjustor.hpp"
@@ -185,18 +186,17 @@ int main(int argc, char *argv[]){
     time_t tt_LOS = mktime(&t_LOS);
 
 
-    while(true){
-
+    for(int captures=0;;++captures){
         //Current time
         time_t timer;
         struct tm * ptm;
         std::time(&timer);  /* get current time; same as: timer = time(NULL)  */
-        cout << "Current time: " << ctime (&timer) << "\n";
+        //cout << "Current time: " << ctime (&timer) << "\n";
 
         //Current time to UTC time
         double UTC=3600*(std::atof(pt.get<std::string>("TIME.Hour").c_str()));
         timer=timer-UTC;
-        cout << "Current UTC time: " << ctime (&timer) << "\n";
+        //cout << "Current UTC time: " << ctime (&timer) << "\n";
 
         //Elapsed time since epoch (seconds)
         double d = std::difftime(timer,rawtime);
@@ -207,16 +207,11 @@ int main(int argc, char *argv[]){
 
         int seconds=0;
         Zeptomoby::OrbitTools::cSite siteEquator(std::atof(pt.get<std::string>("POSITION.Lat").c_str()),std::atof(pt.get<std::string>("POSITION.Long").c_str()),std::atof(pt.get<std::string>("POSITION.Hight").c_str()));
-
-
-
-
         // Calculate the next AOS and LOS
         for (double mpe = d; (mpe <=d+9999999999999999) && (aos!=2); mpe=mpe+0.0166666, ++seconds){
             // Get the position of the satellite at time "mpe"
             Zeptomoby::OrbitTools::cEciTime eci = orbit.GetPosition(mpe);
             Zeptomoby::OrbitTools::cTopo topoLook = siteEquator.GetLookAngle(eci);
-
 
             elevation0=elevation1;
             elevation1=topoLook.ElevationDeg();
@@ -230,7 +225,6 @@ int main(int argc, char *argv[]){
             if((elevation0<0 && elevation1>0) || (elevation0>0 && elevation1<0)){
                 if(elevation0<0 && elevation1>0){
                     std::cout << "\n\n**************  NEXT CAPTURE ************************\n";
-
 
                     t_AOS.tm_year = date[0] -1900;
                     t_AOS.tm_mon = date[1]- 1;
@@ -270,9 +264,8 @@ int main(int argc, char *argv[]){
         elevation0=9999;
         aos=0;
 
-
-
-
+        /************ Capture the next pass ************/
+        //Create a process to capture the signal
         int endd=0;
         int first=0;
         int pid = fork();
@@ -288,14 +281,34 @@ int main(int argc, char *argv[]){
                 case -1:
                     std::cout << "Error\n";
                 break;
+                //Child process
                 case 0:
                     //Start capture
                     if(std::difftime(tt_AOS,timer)<=0 && first==0){
                         std::cout << "Catching...\n";
-                        system("arecord -D hw:1,0 -v -f dat -t wav -c2 ./sample.wav");
+                        std::string record="arecord -D ";
+
+
+                        record.insert(record.size(),pt.get<std::string>("CAPTURE.Hardware"));
+                        record.insert(record.size()," -f dat -t wav -c2 ");
+                        record.insert(record.size(),pt.get<std::string>("CAPTURE.Directory"));
+                        record.insert(record.size(),"/");
+                        record.insert(record.size(),pt.get<std::string>("SPACETRACK.Number"));
+                        record.insert(record.size(),"_");
+                        std::stringstream cap;
+                        cap << captures;
+                        record.insert(record.size(),cap.str());
+                        record.insert(record.size(),".wav");
+
+                        std::cout << record << "\n";
+
+                        system(record.c_str());
+
+                        //system("arecord -D hw:1,0 -v -f dat -t wav -c2 ./sample.wav");
                         first=1;
                     }
                 break;
+                //Father process
                 default:
                     //End capture
                     if(std::difftime(tt_LOS,timer)<=0){
