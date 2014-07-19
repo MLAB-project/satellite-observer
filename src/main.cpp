@@ -282,10 +282,8 @@ int main(int argc, char *argv[]){
         aos=0;
 
         /************ Capture the next pass ************/
-        //Create a process to capture the signal
         bool endd=false;
         bool first=false;
-        int pid = fork();
 
         while(endd==false){
             //Current time
@@ -294,44 +292,33 @@ int main(int argc, char *argv[]){
             UTC=3600*(std::atof(pt.get<std::string>("TIME.Hour").c_str()));
             timer=timer-UTC;
 
-            switch(pid){
-                case -1:
-                    std::cout << "Error\n";
-                break;
-                //Child process
-                case 0:
-                    //Start capture
-                    if(std::difftime(tt_AOS,timer)<=0 && first==false){
-                        std::cout << "Catching...\n";
-                        std::string record="arecord -D ";
+            if(std::difftime(tt_AOS,timer)<=0 && first==false){
+                std::cout << "Catching...\n";
+                std::string record="arecord -D ";
 
 
-                        record.insert(record.size(),pt.get<std::string>("CAPTURE.Hardware"));
-                        record.insert(record.size()," -f dat -t wav -c2 ");
-                        record.insert(record.size(),pt.get<std::string>("CAPTURE.Directory"));
-                        record.insert(record.size(),"/");
-                        record.insert(record.size(),pt.get<std::string>("SPACETRACK.Number"));
-                        record.insert(record.size(),"_");
-                        std::stringstream cap;
-                        cap << captures;
-                        record.insert(record.size(),cap.str());
-                        record.insert(record.size(),".wav");
+                record.insert(record.size(),pt.get<std::string>("CAPTURE.Hardware"));
+                record.insert(record.size()," -f dat -t wav -c2 ");
+                record.insert(record.size(),pt.get<std::string>("CAPTURE.Directory"));
+                record.insert(record.size(),"/");
+                record.insert(record.size(),pt.get<std::string>("SPACETRACK.Number"));
+                record.insert(record.size(),"_");
+                std::stringstream cap;
+                cap << captures;
+                record.insert(record.size(),cap.str());
+                record.insert(record.size(),".wav");
 
-                        std::cout << record << "\n";
+                std::cout << record << "\n";
 
-                        system(record.c_str());
+                system(record.c_str());
 
-                        first=true;
-                    }
-                break;
-                //Father process
-                default:
-                    //End capture
-                    if(std::difftime(tt_LOS,timer)<=0){
-                        kill (pid, SIGINT);
-                        std::cout << "End of the capture.\n\n\n";
-                        endd=true;
-                    }
+                first=true;
+            }
+            //End capture
+            if(std::difftime(tt_LOS,timer)<=0){
+                system("ps ax | grep arecord | grep -v grep | awk '{print $1}' | xargs kill");
+                std::cout << "End of the capture.\n\n\n";
+                endd=true;
             }
         }
     }
