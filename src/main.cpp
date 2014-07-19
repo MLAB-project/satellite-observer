@@ -223,7 +223,7 @@ int main(int argc, char *argv[]){
             }
 
             if((elevation0<0 && elevation1>0) || (elevation0>0 && elevation1<0)){
-                if(elevation0<0 && elevation1>0){
+                if(elevation0<0 && elevation1>0 && aos==0){
                     std::cout << "\n\n**************  NEXT CAPTURE ************************\n";
 
                     t_AOS.tm_year = date[0] -1900;
@@ -243,15 +243,7 @@ int main(int argc, char *argv[]){
                     ++aos;
                     std::cout << "-----------------------------------------------------\n";
                 }
-                //Next capture: NOW
-                else if(elevation0>0 && aos==0){
-                    tt_AOS=UTC_timer;
-                    std::cout << "\n\n**************  NEXT CAPTURE: NOW  ******************\n";
-                    std::cout << "+++ AOS (UTC): " << ctime (&tt_AOS) << "||||" << "Elevation: " << topoLook.ElevationDeg() << " " << "Azimuth: "<< topoLook.AzimuthDeg() <<"\n";
-                    ++aos;
-                    std::cout << "-----------------------------------------------------\n";
-                }
-                else{
+                else if(elevation0>0 && elevation1>0){
                     t_LOS.tm_year = date[0] -1900;
                     t_LOS.tm_mon = date[1]- 1;
                     t_LOS.tm_mday = date[2];
@@ -267,6 +259,23 @@ int main(int argc, char *argv[]){
                     std::cout << "*****************************************************\n";
                     ++aos;
                 }
+            }
+            //Next capture: NOW
+            else if(elevation0>0 && aos==0){
+                    t_AOS.tm_year = date[0] -1900;
+                    t_AOS.tm_mon = date[1]- 1;
+                    t_AOS.tm_mday = date[2];
+
+                    t_AOS.tm_hour = date[3];
+                    t_AOS.tm_min  = date[4];
+                    t_AOS.tm_sec  = date[5];
+                    time.tm_isdst = -1;
+                    tt_AOS = mktime(&t_AOS);
+
+                    tt_AOS=tt_AOS+(mpe)*60;                    std::cout << "\n\n**************  NEXT CAPTURE: NOW  ******************\n";
+                    std::cout << "+++ AOS (UTC): " << ctime (&tt_AOS) << "||||" << "Elevation: " << topoLook.ElevationDeg() << " " << "Azimuth: "<< topoLook.AzimuthDeg() <<"\n";
+                    ++aos;
+                    std::cout << "-----------------------------------------------------\n";
             }
         }
         elevation0=9999;
