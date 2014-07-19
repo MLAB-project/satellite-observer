@@ -243,7 +243,7 @@ int main(int argc, char *argv[]){
                     ++aos;
                     std::cout << "-----------------------------------------------------\n";
                 }
-                else if(elevation0>0 && elevation1>0){
+                else if(elevation0>0 && elevation1<0){
                     t_LOS.tm_year = date[0] -1900;
                     t_LOS.tm_mon = date[1]- 1;
                     t_LOS.tm_mday = date[2];
