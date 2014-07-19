@@ -243,6 +243,14 @@ int main(int argc, char *argv[]){
                     ++aos;
                     std::cout << "-----------------------------------------------------\n";
                 }
+                //Next capture: NOW
+                else if(elevation0>0 && aos==0){
+                    tt_AOS=UTC_timer;
+                    std::cout << "\n\n**************  NEXT CAPTURE: NOW  ******************\n";
+                    std::cout << "+++ AOS (UTC): " << ctime (&tt_AOS) << "||||" << "Elevation: " << topoLook.ElevationDeg() << " " << "Azimuth: "<< topoLook.AzimuthDeg() <<"\n";
+                    ++aos;
+                    std::cout << "-----------------------------------------------------\n";
+                }
                 else{
                     t_LOS.tm_year = date[0] -1900;
                     t_LOS.tm_mon = date[1]- 1;
@@ -266,11 +274,11 @@ int main(int argc, char *argv[]){
 
         /************ Capture the next pass ************/
         //Create a process to capture the signal
-        int endd=0;
-        int first=0;
+        bool endd=false;
+        bool first=false;
         int pid = fork();
 
-        while(endd<1){
+        while(endd==false){
             //Current time
             std::time(&timer);  /* get current time; same as: timer = time(NULL)  */
             //Current time to UTC time
@@ -284,7 +292,7 @@ int main(int argc, char *argv[]){
                 //Child process
                 case 0:
                     //Start capture
-                    if(std::difftime(tt_AOS,timer)<=0 && first==0){
+                    if(std::difftime(tt_AOS,timer)<=0 && first==false){
                         std::cout << "Catching...\n";
                         std::string record="arecord -D ";
 
@@ -304,8 +312,7 @@ int main(int argc, char *argv[]){
 
                         system(record.c_str());
 
-                        //system("arecord -D hw:1,0 -v -f dat -t wav -c2 ./sample.wav");
-                        first=1;
+                        first=true;
                     }
                 break;
                 //Father process
@@ -314,7 +321,7 @@ int main(int argc, char *argv[]){
                     if(std::difftime(tt_LOS,timer)<=0){
                         kill (pid, SIGINT);
                         std::cout << "End of the capture.\n\n\n";
-                        ++endd;
+                        endd=true;
                     }
             }
         }
