@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/carlos/Escritorio/mlab/src/others/utilities.cpp
+/home/carlos/Escritorio/satellite-observer/src/others/utilities.cpp
 utilities.h
-/home/carlos/Escritorio/mlab/src/others/utilities.h
+/home/carlos/Escritorio/satellite-observer/src/others/utilities.h
 
-/home/carlos/Escritorio/mlab/src/others/utilities.h
+/home/carlos/Escritorio/satellite-observer/src/others/utilities.h
 iostream
 -
 vector

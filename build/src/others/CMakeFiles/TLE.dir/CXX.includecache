@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/carlos/Escritorio/mlab/src/others/Satellite.h
+/home/carlos/Escritorio/satellite-observer/src/others/Satellite.h
 string
 -
 iostream
@@ -20,11 +20,11 @@ math.h
 vector
 -
 
-/home/carlos/Escritorio/mlab/src/others/TLE_param.cpp
+/home/carlos/Escritorio/satellite-observer/src/others/TLE_param.cpp
 TLE_param.h
-/home/carlos/Escritorio/mlab/src/others/TLE_param.h
+/home/carlos/Escritorio/satellite-observer/src/others/TLE_param.h
 
-/home/carlos/Escritorio/mlab/src/others/TLE_param.h
+/home/carlos/Escritorio/satellite-observer/src/others/TLE_param.h
 string
 -
 iostream
@@ -40,5 +40,5 @@ boost/lexical_cast.hpp
 iomanip
 -
 Satellite.h
-/home/carlos/Escritorio/mlab/src/others/Satellite.h
+/home/carlos/Escritorio/satellite-observer/src/others/Satellite.h
 

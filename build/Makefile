@@ -42,10 +42,10 @@ EQUALS = =
 CMAKE_EDIT_COMMAND = /usr/bin/cmake-gui
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/carlos/Escritorio/mlab
+CMAKE_SOURCE_DIR = /home/carlos/Escritorio/satellite-observer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/carlos/Escritorio/mlab/build
+CMAKE_BINARY_DIR = /home/carlos/Escritorio/satellite-observer/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -113,9 +113,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/carlos/Escritorio/mlab/build/CMakeFiles /home/carlos/Escritorio/mlab/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/carlos/Escritorio/satellite-observer/build/CMakeFiles /home/carlos/Escritorio/satellite-observer/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/carlos/Escritorio/mlab/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/carlos/Escritorio/satellite-observer/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

@@ -38,10 +38,10 @@ EQUALS = =
 CMAKE_EDIT_COMMAND = /usr/bin/cmake-gui
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/carlos/Escritorio/mlab
+CMAKE_SOURCE_DIR = /home/carlos/Escritorio/satellite-observer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/carlos/Escritorio/mlab/build
+CMAKE_BINARY_DIR = /home/carlos/Escritorio/satellite-observer/build
 
 # Include any dependencies generated for this target.
 include src/orbitTools/core/CMakeFiles/CORE.dir/depend.make
@@ -54,17 +54,17 @@ include src/orbitTools/core/CMakeFiles/CORE.dir/flags.make
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cEci.cpp.o: src/orbitTools/core/CMakeFiles/CORE.dir/flags.make
 src/orbitTools/core/CMakeFiles/CORE.dir/cEci.cpp.o: ../src/orbitTools/core/cEci.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/carlos/Escritorio/mlab/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/carlos/Escritorio/satellite-observer/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/orbitTools/core/CMakeFiles/CORE.dir/cEci.cpp.o"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/CORE.dir/cEci.cpp.o -c /home/carlos/Escritorio/mlab/src/orbitTools/core/cEci.cpp
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/CORE.dir/cEci.cpp.o -c /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cEci.cpp
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cEci.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CORE.dir/cEci.cpp.i"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/carlos/Escritorio/mlab/src/orbitTools/core/cEci.cpp > CMakeFiles/CORE.dir/cEci.cpp.i
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cEci.cpp > CMakeFiles/CORE.dir/cEci.cpp.i
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cEci.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CORE.dir/cEci.cpp.s"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/carlos/Escritorio/mlab/src/orbitTools/core/cEci.cpp -o CMakeFiles/CORE.dir/cEci.cpp.s
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cEci.cpp -o CMakeFiles/CORE.dir/cEci.cpp.s
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cEci.cpp.o.requires:
 .PHONY : src/orbitTools/core/CMakeFiles/CORE.dir/cEci.cpp.o.requires
@@ -77,17 +77,17 @@ src/orbitTools/core/CMakeFiles/CORE.dir/cEci.cpp.o.provides.build: src/orbitTool
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cJulian.cpp.o: src/orbitTools/core/CMakeFiles/CORE.dir/flags.make
 src/orbitTools/core/CMakeFiles/CORE.dir/cJulian.cpp.o: ../src/orbitTools/core/cJulian.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/carlos/Escritorio/mlab/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/carlos/Escritorio/satellite-observer/build/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/orbitTools/core/CMakeFiles/CORE.dir/cJulian.cpp.o"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/CORE.dir/cJulian.cpp.o -c /home/carlos/Escritorio/mlab/src/orbitTools/core/cJulian.cpp
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/CORE.dir/cJulian.cpp.o -c /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cJulian.cpp
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cJulian.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CORE.dir/cJulian.cpp.i"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/carlos/Escritorio/mlab/src/orbitTools/core/cJulian.cpp > CMakeFiles/CORE.dir/cJulian.cpp.i
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cJulian.cpp > CMakeFiles/CORE.dir/cJulian.cpp.i
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cJulian.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CORE.dir/cJulian.cpp.s"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/carlos/Escritorio/mlab/src/orbitTools/core/cJulian.cpp -o CMakeFiles/CORE.dir/cJulian.cpp.s
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cJulian.cpp -o CMakeFiles/CORE.dir/cJulian.cpp.s
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cJulian.cpp.o.requires:
 .PHONY : src/orbitTools/core/CMakeFiles/CORE.dir/cJulian.cpp.o.requires
@@ -100,17 +100,17 @@ src/orbitTools/core/CMakeFiles/CORE.dir/cJulian.cpp.o.provides.build: src/orbitT
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cSite.cpp.o: src/orbitTools/core/CMakeFiles/CORE.dir/flags.make
 src/orbitTools/core/CMakeFiles/CORE.dir/cSite.cpp.o: ../src/orbitTools/core/cSite.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/carlos/Escritorio/mlab/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/carlos/Escritorio/satellite-observer/build/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/orbitTools/core/CMakeFiles/CORE.dir/cSite.cpp.o"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/CORE.dir/cSite.cpp.o -c /home/carlos/Escritorio/mlab/src/orbitTools/core/cSite.cpp
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/CORE.dir/cSite.cpp.o -c /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cSite.cpp
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cSite.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CORE.dir/cSite.cpp.i"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/carlos/Escritorio/mlab/src/orbitTools/core/cSite.cpp > CMakeFiles/CORE.dir/cSite.cpp.i
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cSite.cpp > CMakeFiles/CORE.dir/cSite.cpp.i
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cSite.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CORE.dir/cSite.cpp.s"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/carlos/Escritorio/mlab/src/orbitTools/core/cSite.cpp -o CMakeFiles/CORE.dir/cSite.cpp.s
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cSite.cpp -o CMakeFiles/CORE.dir/cSite.cpp.s
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cSite.cpp.o.requires:
 .PHONY : src/orbitTools/core/CMakeFiles/CORE.dir/cSite.cpp.o.requires
@@ -123,17 +123,17 @@ src/orbitTools/core/CMakeFiles/CORE.dir/cSite.cpp.o.provides.build: src/orbitToo
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cTLE.cpp.o: src/orbitTools/core/CMakeFiles/CORE.dir/flags.make
 src/orbitTools/core/CMakeFiles/CORE.dir/cTLE.cpp.o: ../src/orbitTools/core/cTLE.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/carlos/Escritorio/mlab/build/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/carlos/Escritorio/satellite-observer/build/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/orbitTools/core/CMakeFiles/CORE.dir/cTLE.cpp.o"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/CORE.dir/cTLE.cpp.o -c /home/carlos/Escritorio/mlab/src/orbitTools/core/cTLE.cpp
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/CORE.dir/cTLE.cpp.o -c /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cTLE.cpp
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cTLE.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CORE.dir/cTLE.cpp.i"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/carlos/Escritorio/mlab/src/orbitTools/core/cTLE.cpp > CMakeFiles/CORE.dir/cTLE.cpp.i
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cTLE.cpp > CMakeFiles/CORE.dir/cTLE.cpp.i
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cTLE.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CORE.dir/cTLE.cpp.s"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/carlos/Escritorio/mlab/src/orbitTools/core/cTLE.cpp -o CMakeFiles/CORE.dir/cTLE.cpp.s
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cTLE.cpp -o CMakeFiles/CORE.dir/cTLE.cpp.s
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cTLE.cpp.o.requires:
 .PHONY : src/orbitTools/core/CMakeFiles/CORE.dir/cTLE.cpp.o.requires
@@ -146,17 +146,17 @@ src/orbitTools/core/CMakeFiles/CORE.dir/cTLE.cpp.o.provides.build: src/orbitTool
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cVector.cpp.o: src/orbitTools/core/CMakeFiles/CORE.dir/flags.make
 src/orbitTools/core/CMakeFiles/CORE.dir/cVector.cpp.o: ../src/orbitTools/core/cVector.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/carlos/Escritorio/mlab/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/carlos/Escritorio/satellite-observer/build/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/orbitTools/core/CMakeFiles/CORE.dir/cVector.cpp.o"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/CORE.dir/cVector.cpp.o -c /home/carlos/Escritorio/mlab/src/orbitTools/core/cVector.cpp
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/CORE.dir/cVector.cpp.o -c /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cVector.cpp
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cVector.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CORE.dir/cVector.cpp.i"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/carlos/Escritorio/mlab/src/orbitTools/core/cVector.cpp > CMakeFiles/CORE.dir/cVector.cpp.i
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cVector.cpp > CMakeFiles/CORE.dir/cVector.cpp.i
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cVector.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CORE.dir/cVector.cpp.s"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/carlos/Escritorio/mlab/src/orbitTools/core/cVector.cpp -o CMakeFiles/CORE.dir/cVector.cpp.s
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cVector.cpp -o CMakeFiles/CORE.dir/cVector.cpp.s
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cVector.cpp.o.requires:
 .PHONY : src/orbitTools/core/CMakeFiles/CORE.dir/cVector.cpp.o.requires
@@ -169,17 +169,17 @@ src/orbitTools/core/CMakeFiles/CORE.dir/cVector.cpp.o.provides.build: src/orbitT
 
 src/orbitTools/core/CMakeFiles/CORE.dir/coord.cpp.o: src/orbitTools/core/CMakeFiles/CORE.dir/flags.make
 src/orbitTools/core/CMakeFiles/CORE.dir/coord.cpp.o: ../src/orbitTools/core/coord.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/carlos/Escritorio/mlab/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/carlos/Escritorio/satellite-observer/build/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/orbitTools/core/CMakeFiles/CORE.dir/coord.cpp.o"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/CORE.dir/coord.cpp.o -c /home/carlos/Escritorio/mlab/src/orbitTools/core/coord.cpp
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/CORE.dir/coord.cpp.o -c /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/coord.cpp
 
 src/orbitTools/core/CMakeFiles/CORE.dir/coord.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CORE.dir/coord.cpp.i"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/carlos/Escritorio/mlab/src/orbitTools/core/coord.cpp > CMakeFiles/CORE.dir/coord.cpp.i
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/coord.cpp > CMakeFiles/CORE.dir/coord.cpp.i
 
 src/orbitTools/core/CMakeFiles/CORE.dir/coord.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CORE.dir/coord.cpp.s"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/carlos/Escritorio/mlab/src/orbitTools/core/coord.cpp -o CMakeFiles/CORE.dir/coord.cpp.s
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/coord.cpp -o CMakeFiles/CORE.dir/coord.cpp.s
 
 src/orbitTools/core/CMakeFiles/CORE.dir/coord.cpp.o.requires:
 .PHONY : src/orbitTools/core/CMakeFiles/CORE.dir/coord.cpp.o.requires
@@ -192,17 +192,17 @@ src/orbitTools/core/CMakeFiles/CORE.dir/coord.cpp.o.provides.build: src/orbitToo
 
 src/orbitTools/core/CMakeFiles/CORE.dir/globals.cpp.o: src/orbitTools/core/CMakeFiles/CORE.dir/flags.make
 src/orbitTools/core/CMakeFiles/CORE.dir/globals.cpp.o: ../src/orbitTools/core/globals.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/carlos/Escritorio/mlab/build/CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/carlos/Escritorio/satellite-observer/build/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/orbitTools/core/CMakeFiles/CORE.dir/globals.cpp.o"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/CORE.dir/globals.cpp.o -c /home/carlos/Escritorio/mlab/src/orbitTools/core/globals.cpp
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/CORE.dir/globals.cpp.o -c /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/globals.cpp
 
 src/orbitTools/core/CMakeFiles/CORE.dir/globals.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CORE.dir/globals.cpp.i"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/carlos/Escritorio/mlab/src/orbitTools/core/globals.cpp > CMakeFiles/CORE.dir/globals.cpp.i
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/globals.cpp > CMakeFiles/CORE.dir/globals.cpp.i
 
 src/orbitTools/core/CMakeFiles/CORE.dir/globals.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CORE.dir/globals.cpp.s"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/carlos/Escritorio/mlab/src/orbitTools/core/globals.cpp -o CMakeFiles/CORE.dir/globals.cpp.s
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/globals.cpp -o CMakeFiles/CORE.dir/globals.cpp.s
 
 src/orbitTools/core/CMakeFiles/CORE.dir/globals.cpp.o.requires:
 .PHONY : src/orbitTools/core/CMakeFiles/CORE.dir/globals.cpp.o.requires
@@ -215,17 +215,17 @@ src/orbitTools/core/CMakeFiles/CORE.dir/globals.cpp.o.provides.build: src/orbitT
 
 src/orbitTools/core/CMakeFiles/CORE.dir/stdafx.cpp.o: src/orbitTools/core/CMakeFiles/CORE.dir/flags.make
 src/orbitTools/core/CMakeFiles/CORE.dir/stdafx.cpp.o: ../src/orbitTools/core/stdafx.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/carlos/Escritorio/mlab/build/CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/carlos/Escritorio/satellite-observer/build/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/orbitTools/core/CMakeFiles/CORE.dir/stdafx.cpp.o"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/CORE.dir/stdafx.cpp.o -c /home/carlos/Escritorio/mlab/src/orbitTools/core/stdafx.cpp
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/CORE.dir/stdafx.cpp.o -c /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/stdafx.cpp
 
 src/orbitTools/core/CMakeFiles/CORE.dir/stdafx.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CORE.dir/stdafx.cpp.i"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/carlos/Escritorio/mlab/src/orbitTools/core/stdafx.cpp > CMakeFiles/CORE.dir/stdafx.cpp.i
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/stdafx.cpp > CMakeFiles/CORE.dir/stdafx.cpp.i
 
 src/orbitTools/core/CMakeFiles/CORE.dir/stdafx.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CORE.dir/stdafx.cpp.s"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/carlos/Escritorio/mlab/src/orbitTools/core/stdafx.cpp -o CMakeFiles/CORE.dir/stdafx.cpp.s
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/stdafx.cpp -o CMakeFiles/CORE.dir/stdafx.cpp.s
 
 src/orbitTools/core/CMakeFiles/CORE.dir/stdafx.cpp.o.requires:
 .PHONY : src/orbitTools/core/CMakeFiles/CORE.dir/stdafx.cpp.o.requires
@@ -238,17 +238,17 @@ src/orbitTools/core/CMakeFiles/CORE.dir/stdafx.cpp.o.provides.build: src/orbitTo
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cOrbit.cpp.o: src/orbitTools/core/CMakeFiles/CORE.dir/flags.make
 src/orbitTools/core/CMakeFiles/CORE.dir/cOrbit.cpp.o: ../src/orbitTools/core/cOrbit.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/carlos/Escritorio/mlab/build/CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/carlos/Escritorio/satellite-observer/build/CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/orbitTools/core/CMakeFiles/CORE.dir/cOrbit.cpp.o"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/CORE.dir/cOrbit.cpp.o -c /home/carlos/Escritorio/mlab/src/orbitTools/core/cOrbit.cpp
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/CORE.dir/cOrbit.cpp.o -c /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cOrbit.cpp
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cOrbit.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CORE.dir/cOrbit.cpp.i"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/carlos/Escritorio/mlab/src/orbitTools/core/cOrbit.cpp > CMakeFiles/CORE.dir/cOrbit.cpp.i
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cOrbit.cpp > CMakeFiles/CORE.dir/cOrbit.cpp.i
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cOrbit.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CORE.dir/cOrbit.cpp.s"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/carlos/Escritorio/mlab/src/orbitTools/core/cOrbit.cpp -o CMakeFiles/CORE.dir/cOrbit.cpp.s
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cOrbit.cpp -o CMakeFiles/CORE.dir/cOrbit.cpp.s
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cOrbit.cpp.o.requires:
 .PHONY : src/orbitTools/core/CMakeFiles/CORE.dir/cOrbit.cpp.o.requires
@@ -261,17 +261,17 @@ src/orbitTools/core/CMakeFiles/CORE.dir/cOrbit.cpp.o.provides.build: src/orbitTo
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cNoradBase.cpp.o: src/orbitTools/core/CMakeFiles/CORE.dir/flags.make
 src/orbitTools/core/CMakeFiles/CORE.dir/cNoradBase.cpp.o: ../src/orbitTools/core/cNoradBase.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/carlos/Escritorio/mlab/build/CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/carlos/Escritorio/satellite-observer/build/CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/orbitTools/core/CMakeFiles/CORE.dir/cNoradBase.cpp.o"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/CORE.dir/cNoradBase.cpp.o -c /home/carlos/Escritorio/mlab/src/orbitTools/core/cNoradBase.cpp
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/CORE.dir/cNoradBase.cpp.o -c /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cNoradBase.cpp
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cNoradBase.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CORE.dir/cNoradBase.cpp.i"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/carlos/Escritorio/mlab/src/orbitTools/core/cNoradBase.cpp > CMakeFiles/CORE.dir/cNoradBase.cpp.i
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cNoradBase.cpp > CMakeFiles/CORE.dir/cNoradBase.cpp.i
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cNoradBase.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CORE.dir/cNoradBase.cpp.s"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/carlos/Escritorio/mlab/src/orbitTools/core/cNoradBase.cpp -o CMakeFiles/CORE.dir/cNoradBase.cpp.s
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cNoradBase.cpp -o CMakeFiles/CORE.dir/cNoradBase.cpp.s
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cNoradBase.cpp.o.requires:
 .PHONY : src/orbitTools/core/CMakeFiles/CORE.dir/cNoradBase.cpp.o.requires
@@ -284,17 +284,17 @@ src/orbitTools/core/CMakeFiles/CORE.dir/cNoradBase.cpp.o.provides.build: src/orb
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cNoradSDP4.cpp.o: src/orbitTools/core/CMakeFiles/CORE.dir/flags.make
 src/orbitTools/core/CMakeFiles/CORE.dir/cNoradSDP4.cpp.o: ../src/orbitTools/core/cNoradSDP4.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/carlos/Escritorio/mlab/build/CMakeFiles $(CMAKE_PROGRESS_11)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/carlos/Escritorio/satellite-observer/build/CMakeFiles $(CMAKE_PROGRESS_11)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/orbitTools/core/CMakeFiles/CORE.dir/cNoradSDP4.cpp.o"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/CORE.dir/cNoradSDP4.cpp.o -c /home/carlos/Escritorio/mlab/src/orbitTools/core/cNoradSDP4.cpp
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/CORE.dir/cNoradSDP4.cpp.o -c /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cNoradSDP4.cpp
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cNoradSDP4.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CORE.dir/cNoradSDP4.cpp.i"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/carlos/Escritorio/mlab/src/orbitTools/core/cNoradSDP4.cpp > CMakeFiles/CORE.dir/cNoradSDP4.cpp.i
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cNoradSDP4.cpp > CMakeFiles/CORE.dir/cNoradSDP4.cpp.i
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cNoradSDP4.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CORE.dir/cNoradSDP4.cpp.s"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/carlos/Escritorio/mlab/src/orbitTools/core/cNoradSDP4.cpp -o CMakeFiles/CORE.dir/cNoradSDP4.cpp.s
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cNoradSDP4.cpp -o CMakeFiles/CORE.dir/cNoradSDP4.cpp.s
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cNoradSDP4.cpp.o.requires:
 .PHONY : src/orbitTools/core/CMakeFiles/CORE.dir/cNoradSDP4.cpp.o.requires
@@ -307,17 +307,17 @@ src/orbitTools/core/CMakeFiles/CORE.dir/cNoradSDP4.cpp.o.provides.build: src/orb
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cNoradSGP4.cpp.o: src/orbitTools/core/CMakeFiles/CORE.dir/flags.make
 src/orbitTools/core/CMakeFiles/CORE.dir/cNoradSGP4.cpp.o: ../src/orbitTools/core/cNoradSGP4.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/carlos/Escritorio/mlab/build/CMakeFiles $(CMAKE_PROGRESS_12)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/carlos/Escritorio/satellite-observer/build/CMakeFiles $(CMAKE_PROGRESS_12)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/orbitTools/core/CMakeFiles/CORE.dir/cNoradSGP4.cpp.o"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/CORE.dir/cNoradSGP4.cpp.o -c /home/carlos/Escritorio/mlab/src/orbitTools/core/cNoradSGP4.cpp
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/CORE.dir/cNoradSGP4.cpp.o -c /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cNoradSGP4.cpp
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cNoradSGP4.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CORE.dir/cNoradSGP4.cpp.i"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/carlos/Escritorio/mlab/src/orbitTools/core/cNoradSGP4.cpp > CMakeFiles/CORE.dir/cNoradSGP4.cpp.i
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cNoradSGP4.cpp > CMakeFiles/CORE.dir/cNoradSGP4.cpp.i
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cNoradSGP4.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CORE.dir/cNoradSGP4.cpp.s"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/carlos/Escritorio/mlab/src/orbitTools/core/cNoradSGP4.cpp -o CMakeFiles/CORE.dir/cNoradSGP4.cpp.s
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/carlos/Escritorio/satellite-observer/src/orbitTools/core/cNoradSGP4.cpp -o CMakeFiles/CORE.dir/cNoradSGP4.cpp.s
 
 src/orbitTools/core/CMakeFiles/CORE.dir/cNoradSGP4.cpp.o.requires:
 .PHONY : src/orbitTools/core/CMakeFiles/CORE.dir/cNoradSGP4.cpp.o.requires
@@ -361,8 +361,8 @@ src/orbitTools/core/libCORE.a: src/orbitTools/core/CMakeFiles/CORE.dir/cNoradSGP
 src/orbitTools/core/libCORE.a: src/orbitTools/core/CMakeFiles/CORE.dir/build.make
 src/orbitTools/core/libCORE.a: src/orbitTools/core/CMakeFiles/CORE.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX static library libCORE.a"
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && $(CMAKE_COMMAND) -P CMakeFiles/CORE.dir/cmake_clean_target.cmake
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/CORE.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && $(CMAKE_COMMAND) -P CMakeFiles/CORE.dir/cmake_clean_target.cmake
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/CORE.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 src/orbitTools/core/CMakeFiles/CORE.dir/build: src/orbitTools/core/libCORE.a
@@ -383,10 +383,10 @@ src/orbitTools/core/CMakeFiles/CORE.dir/requires: src/orbitTools/core/CMakeFiles
 .PHONY : src/orbitTools/core/CMakeFiles/CORE.dir/requires
 
 src/orbitTools/core/CMakeFiles/CORE.dir/clean:
-	cd /home/carlos/Escritorio/mlab/build/src/orbitTools/core && $(CMAKE_COMMAND) -P CMakeFiles/CORE.dir/cmake_clean.cmake
+	cd /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core && $(CMAKE_COMMAND) -P CMakeFiles/CORE.dir/cmake_clean.cmake
 .PHONY : src/orbitTools/core/CMakeFiles/CORE.dir/clean
 
 src/orbitTools/core/CMakeFiles/CORE.dir/depend:
-	cd /home/carlos/Escritorio/mlab/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/carlos/Escritorio/mlab /home/carlos/Escritorio/mlab/src/orbitTools/core /home/carlos/Escritorio/mlab/build /home/carlos/Escritorio/mlab/build/src/orbitTools/core /home/carlos/Escritorio/mlab/build/src/orbitTools/core/CMakeFiles/CORE.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/carlos/Escritorio/satellite-observer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/carlos/Escritorio/satellite-observer /home/carlos/Escritorio/satellite-observer/src/orbitTools/core /home/carlos/Escritorio/satellite-observer/build /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core /home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core/CMakeFiles/CORE.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : src/orbitTools/core/CMakeFiles/CORE.dir/depend
 

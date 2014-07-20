@@ -42,10 +42,10 @@ EQUALS = =
 CMAKE_EDIT_COMMAND = /usr/bin/cmake-gui
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/carlos/Escritorio/mlab
+CMAKE_SOURCE_DIR = /home/carlos/Escritorio/satellite-observer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/carlos/Escritorio/mlab/build
+CMAKE_BINARY_DIR = /home/carlos/Escritorio/satellite-observer/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -113,14 +113,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/carlos/Escritorio/mlab/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/carlos/Escritorio/mlab/build/CMakeFiles /home/carlos/Escritorio/mlab/build/src/CMakeFiles/progress.marks
-	cd /home/carlos/Escritorio/mlab/build && $(MAKE) -f CMakeFiles/Makefile2 src/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/carlos/Escritorio/mlab/build/CMakeFiles 0
+	cd /home/carlos/Escritorio/satellite-observer/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/carlos/Escritorio/satellite-observer/build/CMakeFiles /home/carlos/Escritorio/satellite-observer/build/src/CMakeFiles/progress.marks
+	cd /home/carlos/Escritorio/satellite-observer/build && $(MAKE) -f CMakeFiles/Makefile2 src/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/carlos/Escritorio/satellite-observer/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/carlos/Escritorio/mlab/build && $(MAKE) -f CMakeFiles/Makefile2 src/clean
+	cd /home/carlos/Escritorio/satellite-observer/build && $(MAKE) -f CMakeFiles/Makefile2 src/clean
 .PHONY : clean
 
 # The main clean target
@@ -129,22 +129,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/carlos/Escritorio/mlab/build && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
+	cd /home/carlos/Escritorio/satellite-observer/build && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/carlos/Escritorio/mlab/build && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
+	cd /home/carlos/Escritorio/satellite-observer/build && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/carlos/Escritorio/mlab/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/carlos/Escritorio/satellite-observer/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 src/CMakeFiles/sat-observer.dir/rule:
-	cd /home/carlos/Escritorio/mlab/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/sat-observer.dir/rule
+	cd /home/carlos/Escritorio/satellite-observer/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/sat-observer.dir/rule
 .PHONY : src/CMakeFiles/sat-observer.dir/rule
 
 # Convenience name for target.
@@ -153,7 +153,7 @@ sat-observer: src/CMakeFiles/sat-observer.dir/rule
 
 # fast build rule for target.
 sat-observer/fast:
-	cd /home/carlos/Escritorio/mlab/build && $(MAKE) -f src/CMakeFiles/sat-observer.dir/build.make src/CMakeFiles/sat-observer.dir/build
+	cd /home/carlos/Escritorio/satellite-observer/build && $(MAKE) -f src/CMakeFiles/sat-observer.dir/build.make src/CMakeFiles/sat-observer.dir/build
 .PHONY : sat-observer/fast
 
 main.o: main.cpp.o
@@ -161,7 +161,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	cd /home/carlos/Escritorio/mlab/build && $(MAKE) -f src/CMakeFiles/sat-observer.dir/build.make src/CMakeFiles/sat-observer.dir/main.cpp.o
+	cd /home/carlos/Escritorio/satellite-observer/build && $(MAKE) -f src/CMakeFiles/sat-observer.dir/build.make src/CMakeFiles/sat-observer.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -169,7 +169,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	cd /home/carlos/Escritorio/mlab/build && $(MAKE) -f src/CMakeFiles/sat-observer.dir/build.make src/CMakeFiles/sat-observer.dir/main.cpp.i
+	cd /home/carlos/Escritorio/satellite-observer/build && $(MAKE) -f src/CMakeFiles/sat-observer.dir/build.make src/CMakeFiles/sat-observer.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -177,7 +177,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	cd /home/carlos/Escritorio/mlab/build && $(MAKE) -f src/CMakeFiles/sat-observer.dir/build.make src/CMakeFiles/sat-observer.dir/main.cpp.s
+	cd /home/carlos/Escritorio/satellite-observer/build && $(MAKE) -f src/CMakeFiles/sat-observer.dir/build.make src/CMakeFiles/sat-observer.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -207,6 +207,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/carlos/Escritorio/mlab/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/carlos/Escritorio/satellite-observer/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

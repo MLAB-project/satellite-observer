@@ -4,16 +4,16 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/carlos/Escritorio/mlab/src/main.cpp" "/home/carlos/Escritorio/mlab/build/src/CMakeFiles/sat-observer.dir/main.cpp.o"
+  "/home/carlos/Escritorio/satellite-observer/src/main.cpp" "/home/carlos/Escritorio/satellite-observer/build/src/CMakeFiles/sat-observer.dir/main.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 
 # Targets to which this target links.
 SET(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/carlos/Escritorio/mlab/build/src/others/CMakeFiles/TLE.dir/DependInfo.cmake"
-  "/home/carlos/Escritorio/mlab/build/src/others/CMakeFiles/SATELLITE.dir/DependInfo.cmake"
-  "/home/carlos/Escritorio/mlab/build/src/orbitTools/core/CMakeFiles/CORE.dir/DependInfo.cmake"
-  "/home/carlos/Escritorio/mlab/build/src/others/CMakeFiles/UTILITIES.dir/DependInfo.cmake"
+  "/home/carlos/Escritorio/satellite-observer/build/src/others/CMakeFiles/TLE.dir/DependInfo.cmake"
+  "/home/carlos/Escritorio/satellite-observer/build/src/others/CMakeFiles/SATELLITE.dir/DependInfo.cmake"
+  "/home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core/CMakeFiles/CORE.dir/DependInfo.cmake"
+  "/home/carlos/Escritorio/satellite-observer/build/src/others/CMakeFiles/UTILITIES.dir/DependInfo.cmake"
   )
 
 # The include file search paths:

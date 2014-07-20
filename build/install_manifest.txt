@@ -1,1 +1,1 @@
-/home/carlos/Escritorio/mlab/install/sat-observer
+/home/carlos/Escritorio/satellite-observer/install/sat-observer

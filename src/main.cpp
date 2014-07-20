@@ -18,6 +18,10 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
 #include <stdlib.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 #include "boost/date_time/posix_time/posix_time.hpp"
 #include "boost/date_time/local_time_adjustor.hpp"
@@ -60,6 +64,10 @@ int main(int argc, char *argv[]){
 
     float v;
 
+    float frequency;
+
+
+
 
 
     //Config file path.
@@ -87,6 +95,10 @@ int main(int argc, char *argv[]){
     }
 
 
+
+
+
+
     boost::property_tree::ptree pt;
     boost::property_tree::ini_parser::read_ini(file, pt);
 
@@ -95,7 +107,6 @@ int main(int argc, char *argv[]){
     }
     if(pt.get<std::string>("TLE.FileSource")=="server"){
         if(pt.get<std::string>("TLE.Server")=="spacetrack"){
-
             std::string query = "wget --post-data='identity=";
 
             query.insert(query.length(),pt.get<std::string>("SPACETRACK.User"));
@@ -118,6 +129,7 @@ int main(int argc, char *argv[]){
         }
     }
 
+
     TLE* tle = new TLE(pt.get<std::string>("TLE.Local_path"));
     //if(pt.get<std::string>("SPACETRACK.List")!="amateur" && pt.get<std::string>("SPACETRACK.List")!="all"){
         satellites=tle->extract(pt.get<std::string>("SPACETRACK.Number"));
@@ -136,6 +148,11 @@ int main(int argc, char *argv[]){
         std::cout << "Line2: " << s->line2 << "\n";
         std::cout << "*****************************************************\n";
     }
+    frequency = std::stof(pt.get<std::string>("CAPTURE.Frequency"));
+    std::cout << "Frequency: " << frequency << "\n";
+    std::cout << "*****************************************************\n";
+
+
     Satellite* sat;
     sat=satellites[0];
 
@@ -186,15 +203,95 @@ int main(int argc, char *argv[]){
     time_t tt_LOS = mktime(&t_LOS);
 
 
+    //Current time
+    time_t timer;
+    struct tm * ptm;
+    std::time(&timer);  /* get current time; same as: timer = time(NULL)  */
+    double UTC=3600*(std::atof(pt.get<std::string>("TIME.Hour").c_str()));
+    timer=timer-UTC;
+
+
+
+    char result2[PATH_MAX];
+    ssize_t count2 = readlink( "/proc/self/exe", result2, PATH_MAX );
+    std::string path( result2, (count2 > 0) ? count2 : 0 );
+    path=path.substr(0,path.length()-13);
+    path.insert(path.length(),"/frequency.py 1 111");
+    system(path.c_str());
+
+    //system("");
+    //PIPE
+    int ttt;
+    char *pipe = "/tmp/satObPIPE";
+    mkfifo(pipe,0666);
+    ttt = open(pipe,O_WRONLY);
+
+
+    int child_frequency = fork();
+    switch(child_frequency){
+        case -1:
+            std::cout << "Error\n";
+        break;
+        //Child process
+        case 0:
+            while(true){
+                //std::cout << "bucle\n";
+
+                std::time(&timer);  /* get current time; same as: timer = time(NULL)  */
+                timer=timer-UTC;
+
+                double m = std::difftime(timer,rawtime);
+                m=m/60;
+
+                Zeptomoby::OrbitTools::cEciTime eci2 = orbit.GetPosition(m);
+
+                Zeptomoby::OrbitTools::cJulian j(timer);
+                Zeptomoby::OrbitTools::cSite siteEquator(std::atof(pt.get<std::string>("POSITION.Lat").c_str()),std::atof(pt.get<std::string>("POSITION.Long").c_str()),std::atof(pt.get<std::string>("POSITION.Hight").c_str()));
+                float velocity_vector[3]={eci2.Velocity().m_x,eci2.Velocity().m_y,eci2.Velocity().m_z};
+                float station_vector[3]={siteEquator.GetPosition(j).Position().m_x - eci2.Position().m_x,
+                siteEquator.GetPosition(j).Position().m_y - eci2.Position().m_y,
+                siteEquator.GetPosition(j).Position().m_z - eci2.Position().m_z};
+
+                Zeptomoby::OrbitTools::cTopo topoLook2 = siteEquator.GetLookAngle(eci2);
+
+                float velocity=sqrt(velocity_vector[0]*velocity_vector[0]+velocity_vector[1]*velocity_vector[1]+velocity_vector[2]*velocity_vector[2]);
+                float cos_angle = velocity_vector[0]*station_vector[0]+velocity_vector[1]*station_vector[1]+velocity_vector[2]*station_vector[2];
+                float cos_angle1 = sqrt(velocity_vector[0]*velocity_vector[0]+velocity_vector[1]*velocity_vector[1]+velocity_vector[2]*velocity_vector[2]);
+                float cos_angle2 = sqrt(station_vector[0]*station_vector[0]+station_vector[1]*station_vector[1]+station_vector[2]*station_vector[2]);
+                cos_angle=cos_angle/(cos_angle1*cos_angle2);
+                float doppler=(frequency*1000000)*((velocity*1000*cos_angle)/299792458);
+                double f=frequency*1000000 + (double)doppler;
+                f=f/1000000;
+                f=(f-0.01)*2;
+                std::string ff=std::to_string(f);
+
+
+                for(int iii=0;iii<10;++iii){
+                    const char number=(const char)ff[iii];
+                    write(ttt,&number,sizeof(char));
+                }
+
+
+                //sleep(0.3);
+
+
+                        //std::cout << setprecision(12);
+                        //cout << "Current frequency (with doppler): " << f << "Hz\r" << flush;
+            }
+            break;
+    }
+
+
+
+
+
+
     for(int captures=0;;++captures){
         //Current time
-        time_t timer;
-        struct tm * ptm;
         std::time(&timer);  /* get current time; same as: timer = time(NULL)  */
         //cout << "Current time: " << ctime (&timer) << "\n";
 
         //Current time to UTC time
-        double UTC=3600*(std::atof(pt.get<std::string>("TIME.Hour").c_str()));
         timer=timer-UTC;
         //cout << "Current UTC time: " << ctime (&timer) << "\n";
 
@@ -288,6 +385,17 @@ int main(int argc, char *argv[]){
         bool first=false;
         int pid = fork();
 
+
+
+        //write(t,"Mensaje entre Procesos",sizeof("Mensaje entre Procesos"));
+        //cerramos la tuberia
+        //close(t);
+
+        //borramos
+        //unlink(tuberia);
+
+
+
         while(endd==false){
             //Current time
             std::time(&timer);  /* get current time; same as: timer = time(NULL)  */
@@ -323,12 +431,35 @@ int main(int argc, char *argv[]){
 
                         first=true;
                     }
-                    if(std::difftime(tt_AOS,timer)<=0 && first==false){
+                    /*if(std::difftime(tt_AOS,timer)<=0){
+                        double m = std::difftime(timer,rawtime);
+                        m=m/60;
+
+                        Zeptomoby::OrbitTools::cEciTime eci2 = orbit.GetPosition(m);
+
+                        Zeptomoby::OrbitTools::cJulian j(UTC_timer);
+                        float velocity_vector[3]={eci2.Velocity().m_x,eci2.Velocity().m_y,eci2.Velocity().m_z};
+                        float station_vector[3]={siteEquator.GetPosition(j).Position().m_x - eci2.Position().m_x,
+                        siteEquator.GetPosition(j).Position().m_y - eci2.Position().m_y,
+                        siteEquator.GetPosition(j).Position().m_z - eci2.Position().m_z};
+
+                        Zeptomoby::OrbitTools::cTopo topoLook2 = siteEquator.GetLookAngle(eci2);
+
+                        float velocity=sqrt(velocity_vector[0]*velocity_vector[0]+velocity_vector[1]*velocity_vector[1]+velocity_vector[2]*velocity_vector[2]);
+                        float cos_angle = velocity_vector[0]*station_vector[0]+velocity_vector[1]*station_vector[1]+velocity_vector[2]*station_vector[2];
+                        float cos_angle1 = sqrt(velocity_vector[0]*velocity_vector[0]+velocity_vector[1]*velocity_vector[1]+velocity_vector[2]*velocity_vector[2]);
+                        float cos_angle2 = sqrt(station_vector[0]*station_vector[0]+station_vector[1]*station_vector[1]+station_vector[2]*station_vector[2]);
+                        cos_angle=cos_angle/(cos_angle1*cos_angle2);
+                        float doppler=((frequency/2)+1)*((velocity*1000*cos_angle)/299792458);
+                        double f=frequency + (double)doppler;
+
+                        write(t,&f,sizeof(f));
 
 
+                        std::cout << setprecision(12);
+                        cout << "Current frequency (with doppler): " << f << "Hz\r" << flush;
 
-
-                    }
+                    }*/
                 break;
                 //Father process
                 default:
@@ -342,6 +473,25 @@ int main(int argc, char *argv[]){
             }
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

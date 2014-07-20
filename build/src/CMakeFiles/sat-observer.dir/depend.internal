@@ -15,4 +15,4 @@ src/CMakeFiles/sat-observer.dir/main.cpp.o
  ../src/others/Satellite.h
  ../src/others/TLE_param.h
  ../src/others/utilities.h
- /home/carlos/Escritorio/mlab/src/main.cpp
+ /home/carlos/Escritorio/satellite-observer/src/main.cpp

@@ -1,4 +1,4 @@
-# Install script for directory: /home/carlos/Escritorio/mlab/src/orbitTools/core
+# Install script for directory: /home/carlos/Escritorio/satellite-observer/src/orbitTools/core
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)

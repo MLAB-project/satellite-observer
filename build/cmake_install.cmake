@@ -1,4 +1,4 @@
-# Install script for directory: /home/carlos/Escritorio/mlab
+# Install script for directory: /home/carlos/Escritorio/satellite-observer
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,9 +34,9 @@ ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  INCLUDE("/home/carlos/Escritorio/mlab/build/src/others/cmake_install.cmake")
-  INCLUDE("/home/carlos/Escritorio/mlab/build/src/orbitTools/core/cmake_install.cmake")
-  INCLUDE("/home/carlos/Escritorio/mlab/build/src/cmake_install.cmake")
+  INCLUDE("/home/carlos/Escritorio/satellite-observer/build/src/others/cmake_install.cmake")
+  INCLUDE("/home/carlos/Escritorio/satellite-observer/build/src/orbitTools/core/cmake_install.cmake")
+  INCLUDE("/home/carlos/Escritorio/satellite-observer/build/src/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 
@@ -46,7 +46,7 @@ ELSE(CMAKE_INSTALL_COMPONENT)
   SET(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 ENDIF(CMAKE_INSTALL_COMPONENT)
 
-FILE(WRITE "/home/carlos/Escritorio/mlab/build/${CMAKE_INSTALL_MANIFEST}" "")
+FILE(WRITE "/home/carlos/Escritorio/satellite-observer/build/${CMAKE_INSTALL_MANIFEST}" "")
 FOREACH(file ${CMAKE_INSTALL_MANIFEST_FILES})
-  FILE(APPEND "/home/carlos/Escritorio/mlab/build/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+  FILE(APPEND "/home/carlos/Escritorio/satellite-observer/build/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
 ENDFOREACH(file)

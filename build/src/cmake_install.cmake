@@ -1,4 +1,4 @@
-# Install script for directory: /home/carlos/Escritorio/mlab/src
+# Install script for directory: /home/carlos/Escritorio/satellite-observer/src
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,13 +34,13 @@ ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/carlos/Escritorio/mlab/install/sat-observer")
+   "/home/carlos/Escritorio/satellite-observer/install/sat-observer")
   IF (CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   ENDIF (CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
   IF (CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   ENDIF (CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
-FILE(INSTALL DESTINATION "/home/carlos/Escritorio/mlab/install" TYPE FILE FILES "/home/carlos/Escritorio/mlab/build/src/sat-observer")
+FILE(INSTALL DESTINATION "/home/carlos/Escritorio/satellite-observer/install" TYPE FILE FILES "/home/carlos/Escritorio/satellite-observer/build/src/sat-observer")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
