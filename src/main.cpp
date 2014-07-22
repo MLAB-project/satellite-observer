@@ -211,20 +211,14 @@ int main(int argc, char *argv[]){
     timer=timer-UTC;
 
 
+                    /*char result2[PATH_MAX];
+                    ssize_t count2 = readlink( "/proc/self/exe", result2, PATH_MAX );
+                    std::string path( result2, (count2 > 0) ? count2 : 0 );
+                    path=path.substr(0,path.length()-13);
+                    path.insert(path.length(),"/frequency.py 1 111 &");
+                    system(path.c_str());*/
 
-    char result2[PATH_MAX];
-    ssize_t count2 = readlink( "/proc/self/exe", result2, PATH_MAX );
-    std::string path( result2, (count2 > 0) ? count2 : 0 );
-    path=path.substr(0,path.length()-13);
-    path.insert(path.length(),"/frequency.py 1 111");
-    system(path.c_str());
 
-    //system("");
-    //PIPE
-    int ttt;
-    char *pipe = "/tmp/satObPIPE";
-    mkfifo(pipe,0666);
-    ttt = open(pipe,O_WRONLY);
 
 
     int child_frequency = fork();
@@ -234,9 +228,13 @@ int main(int argc, char *argv[]){
         break;
         //Child process
         case 0:
+            int ttt;
+            char *pipe = "/tmp/satObPIPE";
+            mkfifo(pipe,0666);
+            ttt = open(pipe,O_WRONLY);
+
             while(true){
                 //std::cout << "bucle\n";
-
                 std::time(&timer);  /* get current time; same as: timer = time(NULL)  */
                 timer=timer-UTC;
 
@@ -263,26 +261,22 @@ int main(int argc, char *argv[]){
                 double f=frequency*1000000 + (double)doppler;
                 f=f/1000000;
                 f=(f-0.01)*2;
+                f=f+0.00000000;
                 std::string ff=std::to_string(f);
-
 
                 for(int iii=0;iii<10;++iii){
                     const char number=(const char)ff[iii];
                     write(ttt,&number,sizeof(char));
                 }
 
+                std::cout << setprecision(12);
+                //cout << "Current frequency (with doppler): " << f << "Hz\n";
+                cout << "Current frequency (with doppler): " << f << "Hz\r" << flush;
 
-                //sleep(0.3);
-
-
-                        //std::cout << setprecision(12);
-                        //cout << "Current frequency (with doppler): " << f << "Hz\r" << flush;
+                sleep(5);
             }
-            break;
+
     }
-
-
-
 
 
 
