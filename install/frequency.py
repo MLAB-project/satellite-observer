@@ -11,9 +11,9 @@ from pymlab import config
 
 #### Script Arguments ###############################################
 
-if (len(sys.argv) > 3) or (len(sys.argv) < 2):
+if (len(sys.argv) > 2) or (len(sys.argv) < 1):
     sys.stderr.write("Invalid number of arguments.\n")
-    sys.stderr.write("Usage: %s PORT_ADDRESS [REQUIERED_MHz]\n" % (sys.argv[0], ))
+    sys.stderr.write("Usage: %s PORT_ADDRESS\n" % (sys.argv[0], ))
     sys.exit(1)
 
 port    = eval(sys.argv[1])
@@ -40,10 +40,10 @@ print "RMDS Station frequency management test software \r\n"
 fcount = cfg.get_device("counter")
 fgen = cfg.get_device("clkgen")
 time.sleep(0.5)
-frequency = fcount.get_freq()
-rfreq = fgen.get_rfreq()
-hsdiv = fgen.get_hs_div()
-n1 = fgen.get_n1_div()
+#frequency = fcount.get_freq()
+#rfreq = fgen.get_rfreq()
+#hsdiv = fgen.get_hs_div()
+#n1 = fgen.get_n1_div()
 rfPath = "/tmp/satObPIPE"
 #os.mkfifo(rfPath)
 rp = open(rfPath, 'r')
@@ -56,27 +56,101 @@ rp = open(rfPath, 'r')
 
 try:
     with open("frequency.log", "a") as f:
+        lockk=0
+        lockk15=0
+        lockk35=0
+        lockk55=0
+        
+        l15=0
+        l35=0
+        l55=0
+        
+        timee=0
+        newtime=0
+        
+        frequency=0
+        
         while True:
             now = datetime.datetime.now()
-            if (now.second == 5) or (now.second == 10) or (now.second == 15) or (now.second == 20) or (now.second == 25) or (now.second == 30) or (now.second == 35) or (now.second == 40) or (now.second == 45) or (now.second == 50) or (now.second == 55):
+            newtime = now.second
+            response = rp.read(14)
+            if ( (now.second == 15) and lockk15==0 and lockk!=2 and lockk!=3):
+                timee = now.second
                 frequency = fcount.get_freq()
-                if (len(sys.argv) == 3):
-                    response = rp.read(10)
-                    regs = fgen.set_freq(frequency/1e6, float(eval(response)))              
-                now = datetime.datetime.now()
-
-            rfreq = fgen.get_rfreq()
-            hsdiv = fgen.get_hs_div()
-            n1 = fgen.get_n1_div()
-            fdco = (frequency/1e6) * hsdiv * n1
-            fxtal = fdco / rfreq 
-            sys.stdout.write("frequency: " + str(frequency) + " Hz  Time: " + str(now.second))
-            sys.stdout.write(" RFREQ: " + str(rfreq) + " HSDIV: " + str(hsdiv) + " N1: " + str(n1))
-            sys.stdout.write(" fdco: " + str(fdco) + " fxtal: " + str(fxtal) + "\r")
-            f.write("%d\t%s\t%.3f\n" % (time.time(), datetime.datetime.now().isoformat(), frequency))
-
-            sys.stdout.flush()
-            time.sleep(0.9)
+                if (len(sys.argv) == 2):
+                    regs = fgen.set_freq(frequency/1e6, float(eval(response)))
+                sys.stdout.write("frequency: " + str(frequency) + " Hz  Time: " + str(now.second) + "\n")
+                frequency=float(eval(response))
+                lockk=lockk+1
+                lockk15=1
+            if ( (now.second == 35) and lockk35==0 and lockk!=2 and lockk!=3):
+                timee = now.second
+                frequency = fcount.get_freq()
+                if (len(sys.argv) == 2):
+                    regs = fgen.set_freq(frequency/1e6, float(eval(response)))
+                sys.stdout.write("frequency: " + str(frequency) + " Hz  Time: " + str(now.second) + "\n")
+                frequency=float(eval(response))
+                lockk=lockk+1
+                lockk35=1
+            if ( (now.second == 55) and lockk55==0 and lockk!=2 and lockk!=3):
+                timee = now.second
+                frequency = fcount.get_freq()
+                if (len(sys.argv) == 2):
+                    regs = fgen.set_freq(frequency/1e6, float(eval(response)))
+                sys.stdout.write("frequency: " + str(frequency) + " Hz  Time: " + str(now.second) + "\n")
+                frequency=float(eval(response))
+                lockk=lockk+1
+                lockk55=1
+                
+                
+            if (lockk == 3 and now.second != 15 and now.second != 35 and now.second != 55):
+                if (len(sys.argv) == 2):
+                    regs = fgen.set_freq(frequency, float(eval(response)))              
+                frequency = float(eval(response))
+                #sys.stdout.write("*** frequency: " + str(frequency*1000000) + " Hz  Time: " + str(now.second) + "\r")
+                #sys.stdout.flush()  
+                
+                               
+            if ((now.second == 15) and lockk==3 and l15==0 and newtime!=timee):
+				timee = -1
+				fff=fcount.get_freq()/1000000
+				if (len(sys.argv) == 2):
+					regs = fgen.set_freq(fff, float(eval(response)))              
+				frequency = float(eval(response))  
+				sys.stdout.write("frequency: " + str(fff*1000000) + " Hz  Time: " + str(now.second) + "\n")
+				#sys.stdout.write("frequency: " + str(fff*1000000) + " Hz  Time: " + str(now.second) + "\r")
+				#sys.stdout.flush()
+				l15=1
+				l35=0
+				l55=0
+            if ((now.second == 35) and lockk==3 and l35==0 and newtime!=timee):
+				timee = -1
+				fff=fcount.get_freq()/1000000
+				if (len(sys.argv) == 2):
+					regs = fgen.set_freq(fff, float(eval(response)))              
+				frequency = float(eval(response))  
+				sys.stdout.write("frequency: " + str(fff*1000000) + " Hz  Time: " + str(now.second) + "\n")
+				#sys.stdout.write("frequency: " + str(fff*1000000) + " Hz  Time: " + str(now.second) + "\r")
+				#sys.stdout.flush()
+				l15=0
+				l35=1
+				l55=0
+            if ((now.second == 55) and lockk==3 and l55==0 and newtime!=timee):
+				timee = -1
+				fff=fcount.get_freq()/1000000
+				if (len(sys.argv) == 2):
+					regs = fgen.set_freq(fff, float(eval(response)))              
+				frequency = float(eval(response))  
+				sys.stdout.write("frequency: " + str(fff*1000000) + " Hz  Time: " + str(now.second) + "\n")
+				#sys.stdout.write("frequency: " + str(fff*1000000) + " Hz  Time: " + str(now.second) + "\r")
+				#sys.stdout.flush()
+				l15=0
+				l35=0
+				l55=1
+				
+            if (lockk==2):
+                lockk=3
+            time.sleep(0.4)
 except KeyboardInterrupt:
     sys.stdout.write("\r\n")
     sys.exit(0)

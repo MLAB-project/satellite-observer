@@ -1,42 +1,32 @@
 #include "stdafx.h"
-
-#include <stdio.h>
 #include "cTLE.h"
 #include "cEci.h"
 #include "cOrbit.h"
 #include "cSite.h"
-
 #include "time.h"
-
 
 #include "TLE_param.h"
 #include "Satellite.h"
+#include "utilities.h"
+
 #include <string>
 #include <vector>
 #include <stdio.h>
 #include <time.h>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/ini_parser.hpp>
 #include <stdlib.h>
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
-
-#include "boost/date_time/posix_time/posix_time.hpp"
-#include "boost/date_time/local_time_adjustor.hpp"
-#include "boost/date_time/c_local_time_adjustor.hpp"
-
-#include "utilities.h"
-
 #include <signal.h>
+
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/ini_parser.hpp>
 
 
 inline bool exists(const std::string&);
 
-
 int main(int argc, char *argv[]){
-
     std::string file;
     std::string tle_file;
     std::vector<Satellite*> satellites;
@@ -63,14 +53,12 @@ int main(int argc, char *argv[]){
     float sz;
 
     float v;
-
-    float frequency;
-
+    double frequency=0;
 
 
-
-
-    //Config file path.
+    /********************************************************************************/
+    /********************************** FILE PATH **********************************/
+    /********************************************************************************/
     if(argc>=2){
         file = argv[1];
 
@@ -82,7 +70,7 @@ int main(int argc, char *argv[]){
             return 1;
         }
     }
-    //Default conf.
+    //Default conf. ---> NO
     else{
         file = "/home/carlos/Escritorio/mlab/Resources/conf/default.ini";
         char result[PATH_MAX];
@@ -94,21 +82,21 @@ int main(int argc, char *argv[]){
         file=path;
     }
 
-
-
-
-
-
+    /********************************************************************************/
+    /************************** DOWNLOAD TLE FILE ***********************************/
+    /********************************************************************************/
     boost::property_tree::ptree pt;
     boost::property_tree::ini_parser::read_ini(file, pt);
 
+    //TLE file is in a local directory
     if(pt.get<std::string>("TLE.FileSource")=="local"){
-        tle_file = pt.get<std::string>("TLE.FileSource");
+        tle_file = pt.get<std::string>("TLE.Local_path");
     }
+    //Donwload a TLE file from a server
     if(pt.get<std::string>("TLE.FileSource")=="server"){
         if(pt.get<std::string>("TLE.Server")=="spacetrack"){
+            //wget command
             std::string query = "wget --post-data='identity=";
-
             query.insert(query.length(),pt.get<std::string>("SPACETRACK.User"));
             query.insert(query.length(),"&password=");
             query.insert(query.length(),pt.get<std::string>("SPACETRACK.Pass"));
@@ -124,31 +112,26 @@ int main(int argc, char *argv[]){
             query.insert(query.length(),"-O ");
             query.insert(query.length(),pt.get<std::string>("TLE.Local_path"));
 
-
             system(query.c_str());
         }
     }
 
-
+    /********************************************************************************/
+    /************************** EXTRACT KEPLER PARAMETERS ***************************/
+    /********************************************************************************/
     TLE* tle = new TLE(pt.get<std::string>("TLE.Local_path"));
-    //if(pt.get<std::string>("SPACETRACK.List")!="amateur" && pt.get<std::string>("SPACETRACK.List")!="all"){
         satellites=tle->extract(pt.get<std::string>("SPACETRACK.Number"));
-    //}
-    //else{
-        //satellites=tle->extract("z");
-    //}
 
     for(int i=0;i<satellites.size();++i){
         Satellite* s;
         s = satellites[i];
-
         std::cout << "*****************************************************\n";
         std::cout << "Line0: " << s->line0 << "\n";
         std::cout << "Line1: " << s->line1 << "\n";
         std::cout << "Line2: " << s->line2 << "\n";
         std::cout << "*****************************************************\n";
     }
-    frequency = std::stof(pt.get<std::string>("CAPTURE.Frequency"));
+    frequency = std::stod(pt.get<std::string>("CAPTURE.Frequency"));
     std::cout << "Frequency: " << frequency << "\n";
     std::cout << "*****************************************************\n";
 
@@ -158,14 +141,13 @@ int main(int argc, char *argv[]){
 
     //Extract TLE parameters
     const Zeptomoby::OrbitTools::cTle tl(sat->line0,sat->line1,sat->line2);
-
     Zeptomoby::OrbitTools::cOrbit orbit(tl);
 
-   int epochYear = (int)tl.GetField(Zeptomoby::OrbitTools::cTle::FLD_EPOCHYEAR);
-   int days= (int)tl.GetField(Zeptomoby::OrbitTools::cTle::FLD_EPOCHDAY );
-   double fraction  = (tl.GetField(Zeptomoby::OrbitTools::cTle::FLD_EPOCHDAY)-days);
-
     //Epoch of Kepler parameters
+    int epochYear = (int)tl.GetField(Zeptomoby::OrbitTools::cTle::FLD_EPOCHYEAR);
+    int days= (int)tl.GetField(Zeptomoby::OrbitTools::cTle::FLD_EPOCHDAY );
+    double fraction  = (tl.GetField(Zeptomoby::OrbitTools::cTle::FLD_EPOCHDAY)-days);
+
     double date[6];
     tleEpochToDate(epochYear,days,fraction,date);
     struct tm time;
@@ -178,7 +160,6 @@ int main(int argc, char *argv[]){
     time.tm_isdst = -1;
     time_t rawtime = mktime (&time);
     cout << "Epoch (UTC): " << ctime (&rawtime) << "\n";
-
 
     //AOS time
     struct tm t_AOS;
@@ -202,7 +183,6 @@ int main(int argc, char *argv[]){
     time.tm_isdst = -1;
     time_t tt_LOS = mktime(&t_LOS);
 
-
     //Current time
     time_t timer;
     struct tm * ptm;
@@ -211,16 +191,9 @@ int main(int argc, char *argv[]){
     timer=timer-UTC;
 
 
-                    /*char result2[PATH_MAX];
-                    ssize_t count2 = readlink( "/proc/self/exe", result2, PATH_MAX );
-                    std::string path( result2, (count2 > 0) ? count2 : 0 );
-                    path=path.substr(0,path.length()-13);
-                    path.insert(path.length(),"/frequency.py 1 111 &");
-                    system(path.c_str());*/
-
-
-
-
+    /********************************************************************************/
+    /************************** FREQUENCY CORRECTION ********************************/
+    /********************************************************************************/
     int child_frequency = fork();
     switch(child_frequency){
         case -1:
@@ -228,73 +201,110 @@ int main(int argc, char *argv[]){
         break;
         //Child process
         case 0:
-            int ttt;
+            sleep(1.3);
+            int ttt; //PIPE
             char *pipe = "/tmp/satObPIPE";
+
             mkfifo(pipe,0666);
             ttt = open(pipe,O_WRONLY);
 
             while(true){
-                //std::cout << "bucle\n";
-                std::time(&timer);  /* get current time; same as: timer = time(NULL)  */
-                timer=timer-UTC;
-
-                double m = std::difftime(timer,rawtime);
-                m=m/60;
+                /****** Current doppler and frequency *****/
+                std::time(&timer); //get current time; same as: timer = time(NULL)
+                timer=timer-UTC; //Current local time to current UTC time
+                double m = std::difftime(timer,rawtime); //Time elapsed from ephemerids
+                m=m/60; //Seconds to minutes*/
+                timer=timer+UTC; //Current UTC time to current local time
 
                 Zeptomoby::OrbitTools::cEciTime eci2 = orbit.GetPosition(m);
-
                 Zeptomoby::OrbitTools::cJulian j(timer);
                 Zeptomoby::OrbitTools::cSite siteEquator(std::atof(pt.get<std::string>("POSITION.Lat").c_str()),std::atof(pt.get<std::string>("POSITION.Long").c_str()),std::atof(pt.get<std::string>("POSITION.Hight").c_str()));
-                float velocity_vector[3]={eci2.Velocity().m_x,eci2.Velocity().m_y,eci2.Velocity().m_z};
-                float station_vector[3]={siteEquator.GetPosition(j).Position().m_x - eci2.Position().m_x,
-                siteEquator.GetPosition(j).Position().m_y - eci2.Position().m_y,
-                siteEquator.GetPosition(j).Position().m_z - eci2.Position().m_z};
 
-                Zeptomoby::OrbitTools::cTopo topoLook2 = siteEquator.GetLookAngle(eci2);
+                double velocity_vector[3]={eci2.Velocity().m_x-siteEquator.GetPosition(j).Velocity().m_x,eci2.Velocity().m_y-siteEquator.GetPosition(j).Velocity().m_y,eci2.Velocity().m_z-siteEquator.GetPosition(j).Velocity().m_z};
 
-                float velocity=sqrt(velocity_vector[0]*velocity_vector[0]+velocity_vector[1]*velocity_vector[1]+velocity_vector[2]*velocity_vector[2]);
-                float cos_angle = velocity_vector[0]*station_vector[0]+velocity_vector[1]*station_vector[1]+velocity_vector[2]*station_vector[2];
-                float cos_angle1 = sqrt(velocity_vector[0]*velocity_vector[0]+velocity_vector[1]*velocity_vector[1]+velocity_vector[2]*velocity_vector[2]);
-                float cos_angle2 = sqrt(station_vector[0]*station_vector[0]+station_vector[1]*station_vector[1]+station_vector[2]*station_vector[2]);
-                cos_angle=cos_angle/(cos_angle1*cos_angle2);
-                float doppler=(frequency*1000000)*((velocity*1000*cos_angle)/299792458);
-                double f=frequency*1000000 + (double)doppler;
-                f=f/1000000;
+                //Vector satelllite-ground
+                double station_vector[3]={siteEquator.GetPosition(j).Position().m_x - eci2.Position().m_x,
+                    siteEquator.GetPosition(j).Position().m_y - eci2.Position().m_y,
+                        siteEquator.GetPosition(j).Position().m_z - eci2.Position().m_z};
+
+                //Unitary vector
+                double mod_station = sqrt(station_vector[0]*station_vector[0] + station_vector[1]*station_vector[1] + station_vector[2]*station_vector[2]);
+                station_vector[0]=station_vector[0]/mod_station;
+                station_vector[1]=station_vector[1]/mod_station;
+                station_vector[2]=station_vector[2]/mod_station;
+
+                double v = station_vector[0]*velocity_vector[0] + station_vector[1]*velocity_vector[1] + station_vector[2]*velocity_vector[2];
+
+                double doppler=(frequency*1000000.0)*((1000*v)/299792458.0);
+                double f=frequency*1000000.0 + doppler;
+                f=f/1000000.0;
+
+                std::cout << setprecision(9);
+                cout << "Doppler: " << doppler << "Hz  Current frequency: " << f<< " Hz\r" << flush;
+                //cout << "Doppler: " << doppler << "Hz  Current frequency: " << f2/1000000<< "Hz\n";
+
+
+
+                /****** Doppler and frequency in the receiver *****/
+                std::time(&timer); //get current time; same as: timer = time(NULL)
+                timer=timer-UTC; //Current local time to current UTC time
+                m = std::difftime(timer,rawtime); //Time elapsed from ephemerids
+                m=m+1.47;
+                m=m/60; //Seconds to minutes*/
+                timer=timer+UTC+1.47; //Current UTC time to current local time
+
+                eci2 = orbit.GetPosition(m);
+                Zeptomoby::OrbitTools::cJulian j2(timer);
+
+                double velocity_vector2[3]={eci2.Velocity().m_x-siteEquator.GetPosition(j).Velocity().m_x,eci2.Velocity().m_y-siteEquator.GetPosition(j).Velocity().m_y,eci2.Velocity().m_z-siteEquator.GetPosition(j).Velocity().m_z};
+
+                //Vector satelllite-ground
+                double station_vector2[3]={siteEquator.GetPosition(j).Position().m_x - eci2.Position().m_x,
+                    siteEquator.GetPosition(j).Position().m_y - eci2.Position().m_y,
+                        siteEquator.GetPosition(j).Position().m_z - eci2.Position().m_z};
+
+                //Unitary vector
+                double mod_station2 = sqrt(station_vector2[0]*station_vector2[0] + station_vector2[1]*station_vector2[1] + station_vector2[2]*station_vector2[2]);
+                station_vector2[0]=station_vector2[0]/mod_station2;
+                station_vector2[1]=station_vector2[1]/mod_station2;
+                station_vector2[2]=station_vector2[2]/mod_station2;
+
+                v = station_vector2[0]*velocity_vector2[0] + station_vector2[1]*velocity_vector2[1] + station_vector2[2]*velocity_vector2[2];
+
+                doppler=(frequency*1000000.0)*((1000*v)/299792458.0);
+                f=frequency*1000000.0 + doppler;
+                f=f/1000000.0;
                 f=(f-0.01)*2;
-                f=f+0.00000000;
+
                 std::string ff=std::to_string(f);
 
-                for(int iii=0;iii<10;++iii){
-                    const char number=(const char)ff[iii];
-                    write(ttt,&number,sizeof(char));
+                int sizeff = 14-ff.size();
+                for(int iii=0;iii<14;++iii){
+                    if( (14-(iii+1)) < sizeff ){
+                        const char number='0';
+                        write(ttt,&number,sizeof(char));
+                    }
+                    else{
+                        const char number=(const char)ff[iii];
+                        write(ttt,&number,sizeof(char));
+                    }
                 }
 
-                std::cout << setprecision(12);
-                //cout << "Current frequency (with doppler): " << f << "Hz\n";
-                cout << "Current frequency (with doppler): " << f << "Hz\r" << flush;
-
-                sleep(5);
+                usleep(500000);
             }
 
     }
 
-
+    /********************************************************************************/
+    /************************** AOS AND LOS TIME ************************************/
+    /********************************************************************************/
 
     for(int captures=0;;++captures){
-        //Current time
-        std::time(&timer);  /* get current time; same as: timer = time(NULL)  */
-        //cout << "Current time: " << ctime (&timer) << "\n";
-
-        //Current time to UTC time
-        timer=timer-UTC;
-        //cout << "Current UTC time: " << ctime (&timer) << "\n";
-
-        //Elapsed time since epoch (seconds)
-        double d = std::difftime(timer,rawtime);
-        //Elapsed time since epoch (minutes)
-        d=d/60;
+        std::time(&timer); //Get current time
+        timer=timer-UTC; //Current time to UTC time
+        double d = std::difftime(timer,rawtime); //Elapsed time since epoch (seconds)
+        d=d/60; //Elapsed time since epoch (minutes)
         time_t UTC_timer=timer+UTC;
-
 
         int seconds=0;
         Zeptomoby::OrbitTools::cSite siteEquator(std::atof(pt.get<std::string>("POSITION.Lat").c_str()),std::atof(pt.get<std::string>("POSITION.Long").c_str()),std::atof(pt.get<std::string>("POSITION.Hight").c_str()));
@@ -379,17 +389,6 @@ int main(int argc, char *argv[]){
         bool first=false;
         int pid = fork();
 
-
-
-        //write(t,"Mensaje entre Procesos",sizeof("Mensaje entre Procesos"));
-        //cerramos la tuberia
-        //close(t);
-
-        //borramos
-        //unlink(tuberia);
-
-
-
         while(endd==false){
             //Current time
             std::time(&timer);  /* get current time; same as: timer = time(NULL)  */
@@ -425,35 +424,6 @@ int main(int argc, char *argv[]){
 
                         first=true;
                     }
-                    /*if(std::difftime(tt_AOS,timer)<=0){
-                        double m = std::difftime(timer,rawtime);
-                        m=m/60;
-
-                        Zeptomoby::OrbitTools::cEciTime eci2 = orbit.GetPosition(m);
-
-                        Zeptomoby::OrbitTools::cJulian j(UTC_timer);
-                        float velocity_vector[3]={eci2.Velocity().m_x,eci2.Velocity().m_y,eci2.Velocity().m_z};
-                        float station_vector[3]={siteEquator.GetPosition(j).Position().m_x - eci2.Position().m_x,
-                        siteEquator.GetPosition(j).Position().m_y - eci2.Position().m_y,
-                        siteEquator.GetPosition(j).Position().m_z - eci2.Position().m_z};
-
-                        Zeptomoby::OrbitTools::cTopo topoLook2 = siteEquator.GetLookAngle(eci2);
-
-                        float velocity=sqrt(velocity_vector[0]*velocity_vector[0]+velocity_vector[1]*velocity_vector[1]+velocity_vector[2]*velocity_vector[2]);
-                        float cos_angle = velocity_vector[0]*station_vector[0]+velocity_vector[1]*station_vector[1]+velocity_vector[2]*station_vector[2];
-                        float cos_angle1 = sqrt(velocity_vector[0]*velocity_vector[0]+velocity_vector[1]*velocity_vector[1]+velocity_vector[2]*velocity_vector[2]);
-                        float cos_angle2 = sqrt(station_vector[0]*station_vector[0]+station_vector[1]*station_vector[1]+station_vector[2]*station_vector[2]);
-                        cos_angle=cos_angle/(cos_angle1*cos_angle2);
-                        float doppler=((frequency/2)+1)*((velocity*1000*cos_angle)/299792458);
-                        double f=frequency + (double)doppler;
-
-                        write(t,&f,sizeof(f));
-
-
-                        std::cout << setprecision(12);
-                        cout << "Current frequency (with doppler): " << f << "Hz\r" << flush;
-
-                    }*/
                 break;
                 //Father process
                 default:
@@ -467,84 +437,6 @@ int main(int argc, char *argv[]){
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-
-
-
-    std::cout << "\n\n";
-
-    std::time(&timer);  /* get current time; same as: timer = time(NULL)  */
-  /*  UTC=3600*(std::atof(pt.get<std::string>("TIME.Hour").c_str()));
-    timer=timer-UTC;
-    d = std::difftime(timer,rawtime);
-    d=d/60;
-    double m=d;
-
-    while(true){
-        std::time(&timer);  /* get current time; same as: timer = time(NULL)  */
-  /*      UTC=3600*(std::atof(pt.get<std::string>("TIME.Hour").c_str()));
-
-        timer=timer-UTC;
-        d = std::difftime(timer,rawtime);
-        d=d/60;
-        m=d;
-
-        Zeptomoby::OrbitTools::cEciTime eci2 = orbit.GetPosition(m);
-
-        Zeptomoby::OrbitTools::cJulian j(UTC_timer);
-        float velocity_vector[3]={eci2.Velocity().m_x,eci2.Velocity().m_y,eci2.Velocity().m_z};
-        float station_vector[3]={siteEquator.GetPosition(j).Position().m_x - eci2.Position().m_x,
-        siteEquator.GetPosition(j).Position().m_y - eci2.Position().m_y,
-        siteEquator.GetPosition(j).Position().m_z - eci2.Position().m_z};
-
-        Zeptomoby::OrbitTools::cTopo topoLook2 = siteEquator.GetLookAngle(eci2);
-
-
-        float velocity=sqrt(velocity_vector[0]*velocity_vector[0]+velocity_vector[1]*velocity_vector[1]+velocity_vector[2]*velocity_vector[2]);
-
-        float cos_angle = velocity_vector[0]*station_vector[0]+velocity_vector[1]*station_vector[1]+velocity_vector[2]*station_vector[2];
-        float cos_angle1 = sqrt(velocity_vector[0]*velocity_vector[0]+velocity_vector[1]*velocity_vector[1]+velocity_vector[2]*velocity_vector[2]);
-        float cos_angle2 = sqrt(station_vector[0]*station_vector[0]+station_vector[1]*station_vector[1]+station_vector[2]*station_vector[2]);
-        cos_angle=cos_angle/(cos_angle1*cos_angle2);
-        float doppler=100000000*((velocity*1000*cos_angle)/299792458);
-
-        //std::cout << "Velocity: " << velocity << "\n";
-
-
-        //std::cout << "Elevation: " << topoLook.ElevationDeg() << " " << "Azimuth: "<< topoLook.AzimuthDeg() <<"\n";
-
-         std::cout << setprecision(12);
-         double f=100000000.0000000000 + (double)doppler;
-         cout << "Elevation: " << topoLook2.ElevationDeg() << " " << "Azimuth: "<< topoLook2.AzimuthDeg() << " " << "Current frequency (with doppler) to 100Mhz: " << f << "Hz\r" << flush;
-    }
-*/
-
 
     return 0;
 }

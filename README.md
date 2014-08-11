@@ -5,7 +5,9 @@ Software for capturing data from CubeSat like satellites.
 ## Instalation
 ### Dependencies
 
-SatelliteObserver needs: Boost (http://www.boost.org/doc/libs/1_55_0/doc/html/bbv2/installation.html)
+* Boost (http://www.boost.org/doc/libs/1_55_0/doc/html/bbv2/installation.html)
+
+* MLAB-I2c-modules: https://github.com/MLAB-project/MLAB-I2c-modules
 
 ### How to
 * Download the source.
@@ -30,50 +32,59 @@ SatelliteObserver needs: Boost (http://www.boost.org/doc/libs/1_55_0/doc/html/bb
 ```
     cd ../install
 ```
-******************* **Follow ALL steps.**
 
 
 ## Usage
-
 ###Configuration
 #### SpaceTrack account
-If you want to have updated the TLE files you must create an account SpaceCrack.
+If you want to automatically download the TLE file you need an account on Space-Track:
 
-* https://www.space-track.org/auth/login
+* https://www.space-track.org/auth/createAccount
 
 #### Configuration file
-You must edit the configuration file /sat-observer/Resources/conf/default.ini
-and put it in your **executable directory** with the name **default.ini**
+You must edit the configuration file /sat-observer/install/default.ini
 
-A configuration file example:
+A configuration file example (you must fill all):
             
-            
+            [mlab]
+
             [TLE]
             #FileSource=server or FileSource=local
             FileSource = server
             
             #Server=spacetrack
             Server = spacetrack
-            #Where the TLE file will be saved
-            Local_path = /home/carlos/Escritorio/mlab/Resources/TLE/boxscore
+            #Where the TLE file will be saved and name or the local path
+            Local_path = /home/carlos/Escritorio/satellite-observer/Resources/TLE/boxscore
             
             [SPACETRACK]
-            User = carlosruiznaranjo@gmail.com
-            Pass = esasummerofcodeinspace
+            #You space-track user
+            User = mail@gmail.com
+            Pass = password
             #List=amateur, List=all
-            List = amateur
+            List = all
             #NORAD satellite number
-            Number = 27844
+            Number = 39438
             
             
             [POSITION]
-            Lat = 55.6167
-            Long = 12.65
+            Lat = 49.2607
+            Long = 14.6915
             Hight = 0
             
             [TIME]
-            #GMT +2
+            #The timezone of YOUR OPERATIVE SYSTEM
             Hour = +2
+            
+            [CAPTURE]
+            #+- start and end of the capture (in second)
+            Start = -30
+            End = +30
+            #Audio hardware
+            Hardware = hw:1,0
+            #Where will be save the capture file (directory)
+            Directory = /home/odroid/Bolidozor/samples
+            Frequency = 145.98
             
 * FileSource 
     * server: if you want use the SpaceTrack TLE files. (Recomended)
@@ -106,11 +117,18 @@ A configuration file example:
 ```
         cd /you_download_directory/sat-observer/install
 ```
-* Execute the program:
+
+* Open a terminal and execute the frequency script (receiver port as an argument):
+
+    ```
+        ./frequency 1
+    ```
+    
+* Open another terminal and execute the program:
 
     ```
         ./sat-observer
-    ```
+    ``` 
 
 
 
