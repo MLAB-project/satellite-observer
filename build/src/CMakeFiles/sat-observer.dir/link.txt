@@ -1,1 +1,0 @@
-/usr/bin/c++    -std=c++11    CMakeFiles/sat-observer.dir/main.cpp.o  -o sat-observer -rdynamic others/libTLE.a others/libSATELLITE.a orbitTools/core/libCORE.a others/libUTILITIES.a 

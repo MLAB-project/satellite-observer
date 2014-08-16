@@ -1,2 +1,0 @@
-/usr/bin/ar cr libTLE.a  CMakeFiles/TLE.dir/TLE_param.cpp.o
-/usr/bin/ranlib libTLE.a
