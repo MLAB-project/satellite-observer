@@ -50,11 +50,13 @@ A configuration file example (you must fill all):
 
             [TLE]
             #FileSource=server or FileSource=local
-            FileSource = server
-            
+            FileSource = server            
             #Server=spacetrack
             Server = spacetrack
-            #Where the TLE file will be saved and name or the local path
+            #If FileSource=server ->
+            #Local_path = /DIRECTORY/FILE_NAME_DOWNLOADED
+            #If FileSource=local:
+            #Local_path = /DIRECTORY/FILE_NAME_LOCAL
             Local_path = /home/carlos/Escritorio/satellite-observer/Resources/TLE/boxscore
             
             [SPACETRACK]
@@ -92,7 +94,7 @@ A configuration file example (you must fill all):
 * Server
     * Only avaiable SpaceTrack.
 * LocalPath
-    * Where the TLE file will be download or where the TLE file is.
+    * Where the TLE file will be download (/DIRECTORY/FILE_NAME) or where the TLE file is (/DIRECTORY/FILE_NAME).
 * User
     * Your SpaceTrack user.
 * Password
@@ -118,17 +120,21 @@ A configuration file example (you must fill all):
         cd /you_download_directory/sat-observer/install
 ```
 
-* Open a terminal and execute the frequency script (receiver port as an argument):
+
+* Open a terminal and execute the program:
+
+    ```
+        ./sat-observer
+    ``` 
+
+
+* Open other terminal, wait until the first step is calculated and execute the frequency script (receiver port as an argument):
 
     ```
         ./frequency 1
     ```
     
-* Open another terminal and execute the program:
 
-    ```
-        ./sat-observer
-    ``` 
 
 
 
