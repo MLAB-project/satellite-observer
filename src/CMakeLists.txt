@@ -10,15 +10,27 @@ else()
 endif()
 
 
-
 INCLUDE_DIRECTORIES(${sat-observer_SOURCE_DIR}/src/others)
 INCLUDE_DIRECTORIES(${sat-observer_SOURCE_DIR}/src/orbitTools/core)
 INCLUDE_DIRECTORIES(${sat-observer_SOURCE_DIR}/src/orbitTools/orbit)
+INCLUDE_DIRECTORIES(${sat-observer_SOURCE_DIR}/src/socket)
 
 
-ADD_EXECUTABLE(sat-observer main)
+
+ADD_EXECUTABLE(sat-observer sat-observer_main)
+ADD_EXECUTABLE(client client_main)
+ADD_EXECUTABLE(server server_main)
+
 
 TARGET_LINK_LIBRARIES(sat-observer TLE SATELLITE CORE UTILITIES)
+TARGET_LINK_LIBRARIES(client CLIENT_S SOCKET UTILITIES pthread boost_system)
+TARGET_LINK_LIBRARIES(server SERVER_S SOCKET UTILITIES)
 
 
 INSTALL(FILES ${sat-observer_SOURCE_DIR}/build/src/sat-observer DESTINATION ${sat-observer_SOURCE_DIR}/install)
+INSTALL(FILES ${sat-observer_SOURCE_DIR}/build/src/client DESTINATION ${sat-observer_SOURCE_DIR}/install)
+INSTALL(FILES ${sat-observer_SOURCE_DIR}/build/src/server DESTINATION ${sat-observer_SOURCE_DIR}/install)
+
+
+
+

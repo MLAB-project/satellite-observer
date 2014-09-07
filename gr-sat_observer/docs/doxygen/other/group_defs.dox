@@ -1,0 +1,7 @@
+/*!
+ * \defgroup block GNU Radio SAT_OBSERVER C++ Signal Processing Blocks
+ * \brief All C++ blocks that can be used from the SAT_OBSERVER GNU Radio
+ *        module are listed here or in the subcategories below.
+ *
+ */
+

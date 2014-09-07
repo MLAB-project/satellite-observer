@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<block>
+  <name>NOAA analog decoder</name>
+  <key>sat_observer_noaa_analog_decoder_f</key>
+  <category>Satellite Observer</category>
+  <import>import sat_observer</import>
+  <make>sat_observer.noaa_analog_decoder_f($filename, $mode, $noaaNumber)</make>
+
+  <param>
+    <name>File</name>
+    <key>filename</key>
+    <type>string</type>
+  </param>
+  
+  <param>
+    <name>Mode</name>
+    <key>mode</key>
+    <type>string</type>
+  </param>
+  
+  <param>
+    <name>NOAA number</name>
+    <key>noaaNumber</key>
+    <type>int</type>
+  </param>
+
+
+  <sink>
+    <name>in</name>
+    <type>float</type>
+  </sink>
+
+</block>

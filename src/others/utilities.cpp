@@ -1,5 +1,6 @@
 #include "utilities.h"
-
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/ini_parser.hpp>
 
 void doppler(float satx_0,float saty_0,float satz_0,float satx_1,float saty_1,float satz_1,float satv_0,float satv_1,float sx,float sy,float sz,float f){
 //(x_0,y_0,z_0) Satellite position in t=t_0
@@ -24,7 +25,17 @@ std::cout << "Doppler: " << doppler << "\n";
 
 
 
+void config(std::string name, boost::property_tree::ptree* conf,int binary_size){
+    std::string file;
+    char result[300];
+    ssize_t count = readlink( "/proc/self/exe", result, 300 );
+    std::string path( result, (count > 0) ? count : 0 );
+    path=path.substr(0,path.length()-binary_size);
+    path.insert(path.length(),name);
+    file=path;
 
+    boost::property_tree::ini_parser::read_ini(file, *conf);
+}
 
 
 void tleEpochToDate(int epochYear,int days,double s,double* date){
@@ -152,3 +163,5 @@ void tleEpochToDate(int epochYear,int days,double s,double* date){
     date[4]=epochMinutes;
     date[5]=epochSeconds;
 }
+
+
