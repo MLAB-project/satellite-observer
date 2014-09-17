@@ -292,16 +292,16 @@ int decode (std::string file, std::string mode,int satelliteNumber)
 		return -1;
 
 /* main loop */
-	printf("Decoding: %s \n", file.c_str());
+	//printf("Decoding: %s \n", file.c_str());
 	for (nrow = 0; nrow < 3000; nrow++) {
 		if (prow[nrow] == NULL)
 			prow[nrow] = (float *) malloc(sizeof(float) * 2150);
 		if (getpixelrow(prow[nrow]) == 0)
 			break;
-		printf("%d\r", nrow);
-		fflush(stdout);
+		//printf("%d\r", nrow);
+		//fflush(stdout);
 	}
-	printf("\nDone\n");
+	//printf("\nDone\n");
 	sf_close(inwav);
 
 /* raw image */

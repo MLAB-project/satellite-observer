@@ -1,3 +1,26 @@
+/* 	Satellite Observer.
+*	The main objective of Satellite Observer is the autonomous capture
+*	of signal from small satellites and the subsequent
+*	decoding. It  keeps track of the trajectory, continuously updated of
+*	Doppler shift and tunes the receiver.
+*
+*	Copyright (C) 2014  Carlos Alberto Ruiz Naranjo
+*	carlosruiznaranjo@gmail.com
+*
+*	This program is free software: you can redistribute it and/or modify
+*	it under the terms of the GNU Affero General Public License as
+*	published by the Free Software Foundation, either version 3 of the
+*	License, or (at your option) any later version.
+
+*	This program is distributed in the hope that it will be useful,
+*	but WITHOUT ANY WARRANTY; without even the implied warranty of
+*	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*	GNU Affero General Public License for more details.
+*
+*	You should have received a copy of the GNU Affero General Public License
+*	along with this program.  If not, see <http://www.gnu.org/licenses
+*/
+
 #include "server_socket.h"
 #include "socket.h"
 #include "utilities.h"
@@ -12,6 +35,10 @@
 #include <sys/ipc.h>
 #include <sys/sem.h>
 #include <sys/shm.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
@@ -20,6 +47,14 @@ main ()
 {
     int port;
     std::vector<Sat*> sat_tracking;
+
+    /********************************************************************************/
+    /************************************** PIPE ***********************************/
+    /********************************************************************************/
+	int ttt; //PIPE
+	char *pipe = "/tmp/satObPIPE";
+
+	mkfifo(pipe,0666);
 
     /********************************************************************************/
     /********************************** SEMAPHORE CAPTURE **************************/
@@ -51,6 +86,7 @@ main ()
         return -1;
 	}
 	semctl(sem_idf,0,SETVAL,1);
+
     /********************************************************************************/
     /********************************** SHARED MEMORY ******************************/
     /********************************************************************************/
@@ -145,9 +181,6 @@ main ()
         {
             if(std::atoi(satellite_number.c_str())==sat_tracking[i]->satellite_number ){
                 exist_sat=true;
-                //std::time(&timer);
-                //sat_tracking[i]->frequency=std::atof(frequency.c_str());
-                //sat_tracking[i]->time=timer;
             }
         }
 
@@ -193,8 +226,6 @@ main ()
         std::cout << "\n\n\n";
     }
 
-	//strcpy (str, "bye");
-	//write_socket(socket_client, str, 6);
 
 	close (socket_client);
 	close (socket_server);

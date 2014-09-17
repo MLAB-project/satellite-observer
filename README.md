@@ -9,11 +9,33 @@ Software for capturing data from CubeSat like satellites.
 
 * MLAB-I2c-modules: https://github.com/MLAB-project/MLAB-I2c-modules
 
-### How to
+* GNURadio 3.7.5 or higher: http://gnuradio.org/redmine/projects/gnuradio/wiki/BuildGuide
+
+### How to: NOAA decoder block 
 * Download the source.
+* Go to /sat-observer/gr-sat_observer:
+```
+    cd /your_download_directory/sat-observer/gr-sat_observer  
+```
+* Make the build directory:
+```
+    mkdir build
+```
+* Build the project:
+```
+    cd /build
+    cmake ..
+```
+* Install:
+```
+    sudo make install
+```
+
+
+### How to: satellite-observer
 * Go to /sat-observer:
 ```
-    cd /you_download_directory/sat-observer
+    cd /your_download_directory/sat-observer  
 ```
 * Make the build directory:
 ```
@@ -41,32 +63,28 @@ If you want to automatically download the TLE file you need an account on Space-
 
 * https://www.space-track.org/auth/createAccount
 
-#### Configuration file
+#### Server configuration file
 You must edit the configuration file /sat-observer/install/default.ini
 
 A configuration file example (you must fill all):
             
             [mlab]
+            
+            [CONNECTION]
+            Port = 30030
 
             [TLE]
-            #FileSource=server or FileSource=local
+            #FileSource=server
             FileSource = server            
             #Server=spacetrack
             Server = spacetrack
-            #If FileSource=server ->
-            #Local_path = /DIRECTORY/FILE_NAME_DOWNLOADED
-            #If FileSource=local:
-            #Local_path = /DIRECTORY/FILE_NAME_LOCAL
-            Local_path = /home/carlos/Escritorio/satellite-observer/Resources/TLE/boxscore
+            #DIRECTORY whre will saved the TLE files
+            Local_path = /home/carlos/Escritorio/TLE
             
             [SPACETRACK]
             #You space-track user
             User = mail@gmail.com
             Pass = password
-            #List=amateur, List=all
-            List = all
-            #NORAD satellite number
-            Number = 39438
             
             
             [POSITION]
@@ -84,24 +102,21 @@ A configuration file example (you must fill all):
             End = +30
             #Audio hardware
             Hardware = hw:1,0
-            #Where will be save the capture file (directory)
+            #Where the capture file (directory) will be save
             Directory = /home/odroid/Bolidozor/samples
             Frequency = 145.98
             
 * FileSource 
-    * server: if you want use the SpaceTrack TLE files. (Recomended)
-    * local: if you want use a local TLE file.
+    * server
+    * local: not supported.
 * Server
     * Only avaiable SpaceTrack.
 * LocalPath
-    * Where the TLE file will be download (/DIRECTORY/FILE_NAME) or where the TLE file is (/DIRECTORY/FILE_NAME).
+    * Where the TLE file will be download (/DIRECTORY)
 * User
     * Your SpaceTrack user.
 * Password
     * Your SpaceTrack pass.
-* List
-    * amateur: will be use a list of amateur satellites for search the satellite.
-    * all: satellite will be search in the todo list.
 * Lat:
     * Latitude of station.
 * Long:
@@ -114,7 +129,9 @@ A configuration file example (you must fill all):
         
             Hour = +2
         
-#### Running sat-observer
+### Running Satellite Observer
+#### Server
+
 * Go to the install directory:
 ```
         cd /you_download_directory/sat-observer/install
@@ -124,18 +141,44 @@ A configuration file example (you must fill all):
 * Open a terminal and execute the program:
 
     ```
-        ./sat-observer
+        ./server
     ``` 
-
-
-* Open other terminal, wait until the first step is calculated and execute the frequency script (receiver port as an argument):
+    
+* Open other terminal and execute the frequency script (receiver port as an argument):
 
     ```
-        ./frequency 1
+        python ./frequency.py 1
     ```
     
+#### Client
 
+* Go to the install directory:
+```
+        cd /you_download_directory/sat-observer/install
+```
 
+* Open other terminal and execute client:  ./client IP Port Satellite_number 
+
+    ```
+        ./client 127.0.0.1 30000 33591
+    ```
+    
+#### NOAA decoder block
+
+Satellite Observer demodulates and decodes the signal of NOAA Satellite automatically. But you can do it manually with the script: ./decoder.py
+
+* Go to the install directory:
+```
+        cd /you_download_directory/sat-observer/install
+```
+
+* Open other terminal and execute the script: 
+
+    ```
+        python ./decoder.py /home/carlos/signalIn.wav /home/carlos/signalOut.wav
+    ```
+    
+*** SignalIn format is: wav file, sample rate 48000, 2 channels, 32 bits.
 
 
 

@@ -1,14 +1,35 @@
+/* 	Satellite Observer.
+*	The main objective of Satellite Observer is the autonomous capture
+*	of signal from small satellites and the subsequent
+*	decoding. It  keeps track of the trajectory, continuously updated of
+*	Doppler shift and tunes the receiver.
+*
+*	Copyright (C) 2014  Carlos Alberto Ruiz Naranjo
+*	carlosruiznaranjo@gmail.com
+*
+*	This program is free software: you can redistribute it and/or modify
+*	it under the terms of the GNU Affero General Public License as
+*	published by the Free Software Foundation, either version 3 of the
+*	License, or (at your option) any later version.
+
+*	This program is distributed in the hope that it will be useful,
+*	but WITHOUT ANY WARRANTY; without even the implied warranty of
+*	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*	GNU Affero General Public License for more details.
+*
+*	You should have received a copy of the GNU Affero General Public License
+*	along with this program.  If not, see <http://www.gnu.org/licenses
+*/
+#include "TLE_param.h"
+#include "Satellite.h"
+#include "utilities.h"
+
 #include "stdafx.h"
 #include "cTLE.h"
 #include "cEci.h"
 #include "cOrbit.h"
 #include "cSite.h"
 #include "time.h"
-
-#include "TLE_param.h"
-#include "Satellite.h"
-#include "utilities.h"
-
 
 #include <string>
 #include <vector>
@@ -42,7 +63,6 @@ int main(int argc, char *argv[]){
     double elevation1=9999;
     double azimuth1=9999;
     int aos=0;
-
 
     double min_AOS;
     double min_LOS;
@@ -115,8 +135,6 @@ int main(int argc, char *argv[]){
         return -1;
 	}
 
-
-
     /********************************************************************************/
     /********************************** FILE PATH **********************************/
     /********************************************************************************/
@@ -129,13 +147,14 @@ int main(int argc, char *argv[]){
     boost::property_tree::ptree pt;
     boost::property_tree::ini_parser::read_ini(path, pt);
 
-
     /********************************************************************************/
     /************************** DOWNLOAD TLE FILE ***********************************/
     /********************************************************************************/
     //TLE file is in a local directory
     if(pt.get<std::string>("TLE.FileSource")=="local"){
-        tle_file = pt.get<std::string>("TLE.Local_path");
+        //tle_file = pt.get<std::string>("TLE.Local_path");
+        std::cout << "ERROR: local file is not accepted.";
+        return -1;
     }
     //Donwload a TLE file from a server
     if(pt.get<std::string>("TLE.FileSource")=="server"){
@@ -173,15 +192,8 @@ int main(int argc, char *argv[]){
     std::getline(f,line1);
     std::getline(f,line2);
 
-    /*std::cout << "*****************************************************\n";
-    std::cout << "Line0: " << line0 << "\n";
-    std::cout << "Line1: " << line1 << "\n";
-    std::cout << "Line2: " << line2 << "\n";
-    std::cout << "*****************************************************\n";*/
-
     frequency = std::stod(freq);
-    /*std::cout << "Frequency: " << freq << "\n";
-    std::cout << "*****************************************************\n";*/
+
 
     //Extract TLE parameters
     const Zeptomoby::OrbitTools::cTle tl(line0,line1,line2);
@@ -203,7 +215,6 @@ int main(int argc, char *argv[]){
     time.tm_sec  = date[5];
     time.tm_isdst = -1;
     time_t rawtime = mktime (&time);
-    //cout << "Epoch (UTC): " << ctime (&rawtime) << "\n";
 
     //AOS time
     struct tm t_AOS;
@@ -230,7 +241,7 @@ int main(int argc, char *argv[]){
     //Current time
     time_t timer;
     struct tm * ptm;
-    std::time(&timer);  /* get current time; same as: timer = time(NULL)  */
+    std::time(&timer);
     double UTC=3600*(std::atof(pt.get<std::string>("TIME.Hour").c_str()));
     timer=timer-UTC;
 
@@ -404,8 +415,8 @@ int main(int argc, char *argv[]){
                     tt_LOS=tt_LOS+std::atof(pt.get<std::string>("CAPTURE.End").c_str());
 
                     tt_LOS=tt_LOS+(mpe)*60;
-                    std::cout << "+++ LOS (UTC): " << ctime (&tt_LOS) << "||||" << "Elevation: " << topoLook.ElevationDeg() << " " << "Azimuth: "<< topoLook.AzimuthDeg() <<"\n";
-                    std::cout << "*****************************************************\n";
+                    //std::cout << "+++ LOS (UTC): " << ctime (&tt_LOS) << "||||" << "Elevation: " << topoLook.ElevationDeg() << " " << "Azimuth: "<< topoLook.AzimuthDeg() <<"\n";
+                    //std::cout << "*****************************************************\n";
                     ++aos;
                 }
             }
@@ -422,10 +433,10 @@ int main(int argc, char *argv[]){
                     tt_AOS = mktime(&t_AOS);
 
                     tt_AOS=tt_AOS+(mpe)*60;
-                    std::cout << "\n\n**************  NEXT CAPTURE: NOW  ******************\n";
-                    std::cout << "+++ AOS (UTC): " << ctime (&tt_AOS) << "||||" << "Elevation: " << topoLook.ElevationDeg() << " " << "Azimuth: "<< topoLook.AzimuthDeg() <<"\n";
+                    //std::cout << "\n\n**************  NEXT CAPTURE: NOW  ******************\n";
+                    //std::cout << "+++ AOS (UTC): " << ctime (&tt_AOS) << "||||" << "Elevation: " << topoLook.ElevationDeg() << " " << "Azimuth: "<< topoLook.AzimuthDeg() <<"\n";
                     ++aos;
-                    std::cout << "----------------------------------------------------\n";
+                    //std::cout << "----------------------------------------------------\n";
             }
         }
 
@@ -507,6 +518,46 @@ int main(int argc, char *argv[]){
                         kill (pid, SIGTERM);
                         endd=true;
                         *memory=0;
+
+                        /*********************************************************************************/
+                        /************************** DECODE NOAA SIGNAL **********************************/
+                        /********************************************************************************/
+                        //NOAA19
+                        if(intsat==33591){
+                            switch(pid){
+                                case -1:
+                                    std::cout << "Error\n";
+                                break;
+                                //Child process
+                                case 0:
+                                    char result[PATH_MAX];
+                                    ssize_t count = readlink( "/proc/self/exe", result, PATH_MAX );
+                                    std::string cm( result, (count > 0) ? count : 0 );
+                                    cm=cm.substr(0,cm.length()-12);
+                                    cm.insert(0,"python ");
+
+                                    cm.insert(cm.size(),pt.get<std::string>("CAPTURE.Directory"));
+                                    cm.insert(cm.size(),"/");
+                                    cm.insert(cm.size(),sat_number);
+                                    cm.insert(cm.size(),"_");
+                                    std::stringstream cap;
+                                    cap << captures;
+                                    cm.insert(cm.size(),cap.str());
+                                    cm.insert(cm.size(),".wav");
+
+                                    cm.insert(cm.size()," ");
+
+                                    cm.insert(cm.size(),pt.get<std::string>("CAPTURE.Directory"));
+                                    cm.insert(cm.size(),"/");
+                                    cm.insert(cm.size(),sat_number);
+                                    cm.insert(cm.size(),"_");
+                                    cm.insert(cm.size(),cap.str());
+                                    cm.insert(cm.size(),"dec.wav");
+
+                                    system(cm.c_str());
+                                break;
+                            }
+                        }
                     }
                     break;
             }
