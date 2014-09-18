@@ -163,7 +163,6 @@ try:
 				if (len(sys.argv) == 2):
 					regs = fgen.set_freq(fff, float(eval(response)))              
 				frequency = float(eval(response))  
-				sys.stdout.write("llega: " + response + "\n")
 				sys.stdout.write("frequency: " + str(fff*1000000) + " Hz  Time: " + str(now.second) + "\n")
 				#sys.stdout.write("frequency: " + str(fff*1000000) + " Hz  Time: " + str(now.second) + "\r")
 				#sys.stdout.flush()

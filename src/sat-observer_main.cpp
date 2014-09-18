@@ -399,9 +399,9 @@ int main(int argc, char *argv[]){
                     tt_AOS=tt_AOS+(mpe)*60;
                     tt_AOS=tt_AOS+std::atof(pt.get<std::string>("CAPTURE.Start").c_str());
 
-                    std::cout << "+++ AOS (UTC): " << ctime (&tt_AOS) << "||||" << "Elevation: " << topoLook.ElevationDeg() << " " << "Azimuth: "<< topoLook.AzimuthDeg() <<"\n";
+                    //std::cout << "+++ AOS (UTC): " << ctime (&tt_AOS) << "||||" << "Elevation: " << topoLook.ElevationDeg() << " " << "Azimuth: "<< topoLook.AzimuthDeg() <<"\n";
                     ++aos;
-                    std::cout << "-----------------------------------------------------\n";
+                    //std::cout << "-----------------------------------------------------\n";
                 }
                 else if(elevation0>0 && elevation1<0){
                     t_LOS.tm_year = date[0] -1900;
@@ -479,7 +479,6 @@ int main(int argc, char *argv[]){
                         std::cout << "Catching satellite: " << intsat << " --> " << ctime(&timer) << "\n";
                         timer=timer-UTC;
 
-
                         std::string record="arecord -D ";
                         record.insert(record.size(),pt.get<std::string>("CAPTURE.Hardware"));
                         record.insert(record.size()," -f dat -q -t wav -c2 ");
@@ -514,17 +513,16 @@ int main(int argc, char *argv[]){
                         std::cout << "End: " << intsat << "-->" << ctime(&timer) << "\n";
                         timer=timer-UTC;
 
-                        system("ps ax | grep arecord | grep -v grep | awk '{print $1}' | xargs kill");
-                        kill (pid, SIGTERM);
-                        endd=true;
-                        *memory=0;
-
+						system("ps ax | grep arecord | grep -v grep | awk '{print $1}' | xargs kill");
+						usleep(500000);
                         /*********************************************************************************/
                         /************************** DECODE NOAA SIGNAL **********************************/
                         /********************************************************************************/
+						memory=0;
                         //NOAA19
                         if(intsat==33591){
-                            switch(pid){
+							int pidd = fork();
+                            switch(pidd){
                                 case -1:
                                     std::cout << "Error\n";
                                 break;
@@ -535,6 +533,9 @@ int main(int argc, char *argv[]){
                                     std::string cm( result, (count > 0) ? count : 0 );
                                     cm=cm.substr(0,cm.length()-12);
                                     cm.insert(0,"python ");
+
+                                    cm.insert(cm.size(),"decoder.py ");
+
 
                                     cm.insert(cm.size(),pt.get<std::string>("CAPTURE.Directory"));
                                     cm.insert(cm.size(),"/");
@@ -558,6 +559,8 @@ int main(int argc, char *argv[]){
                                 break;
                             }
                         }
+                        kill (pid, SIGTERM);
+                        endd=true;
                     }
                     break;
             }

@@ -79,7 +79,7 @@ A configuration file example (you must fill all):
             #Server=spacetrack
             Server = spacetrack
             #DIRECTORY whre will saved the TLE files
-            Local_path = /home/carlos/Escritorio/TLE
+            Local_path = /home/odroid/Bolidozor/TLE
             
             [SPACETRACK]
             #You space-track user
@@ -157,7 +157,7 @@ A configuration file example (you must fill all):
         cd /you_download_directory/sat-observer/install
 ```
 
-* Open other terminal and execute client:  ./client IP Port Satellite_number 
+* Open other terminal and execute client:  ./client IP Port Satellite_number frequency 137.1
 
     ```
         ./client 127.0.0.1 30000 33591
