@@ -156,7 +156,7 @@ int main(int argc, char *argv[]){
         std::cout << "ERROR: local file is not accepted.";
         return -1;
     }
-    //Donwload a TLE file from a server
+    //Download a TLE file from a server
     if(pt.get<std::string>("TLE.FileSource")=="server"){
         if(pt.get<std::string>("TLE.Server")=="spacetrack"){
             //wget command
@@ -479,16 +479,15 @@ int main(int argc, char *argv[]){
                         std::cout << "Catching satellite: " << intsat << " --> " << ctime(&timer) << "\n";
                         timer=timer-UTC;
 
-                        std::string record=" nc localhost ";
+                        std::string record="today=`date '+%Y_%m_%d_%H%M%S%N'`; nc localhost ";
                         record.insert(record.size(),pt.get<std::string>("CAPTURE.Port"));
                         record.insert(record.size(),"| sox -t f32 -c 2 -r 96000 - ");
                         record.insert(record.size(),pt.get<std::string>("CAPTURE.Directory"));
                         record.insert(record.size(),"/");
                         record.insert(record.size(),sat_number);
                         record.insert(record.size(),"_");
-                        std::stringstream cap;
-                        cap << captures;
-                        record.insert(record.size(),cap.str());
+                        record.insert(record.size(),pt.get<std::string>("POSITION.Station"));
+                        record.insert(record.size(),"-$today");
                         record.insert(record.size(),".wav");
                         system(record.c_str());
 

@@ -163,7 +163,7 @@ A configuration file example (you must fill all):
 * Open other terminal and execute client:  ./client IP Port Satellite_number frequency 137.1
 
     ```
-        ./client 127.0.0.1 30000 33591
+        ./client 127.0.0.1 30000 33591 137.1
     ```
     
 #### NOAA decoder block
