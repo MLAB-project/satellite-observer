@@ -479,9 +479,9 @@ int main(int argc, char *argv[]){
                         std::cout << "Catching satellite: " << intsat << " --> " << ctime(&timer) << "\n";
                         timer=timer-UTC;
 
-                        std::string record="arecord -D ";
-                        record.insert(record.size(),pt.get<std::string>("CAPTURE.Hardware"));
-                        record.insert(record.size()," -f dat -q -t wav -c2 ");
+                        std::string record=" nc localhost ";
+                        record.insert(record.size(),pt.get<std::string>("CAPTURE.Port"));
+                        record.insert(record.size(),"| sox -t f32 -c 2 -r 96000 - ");
                         record.insert(record.size(),pt.get<std::string>("CAPTURE.Directory"));
                         record.insert(record.size(),"/");
                         record.insert(record.size(),sat_number);
@@ -513,7 +513,7 @@ int main(int argc, char *argv[]){
                         std::cout << "End: " << intsat << "-->" << ctime(&timer) << "\n";
                         timer=timer-UTC;
 
-						system("ps ax | grep arecord | grep -v grep | awk '{print $1}' | xargs kill");
+						system("ps ax | grep sox | grep -v grep | awk '{print $1}' | xargs kill");
 						usleep(500000);
                         /*********************************************************************************/
                         /************************** DECODE NOAA SIGNAL **********************************/

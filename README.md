@@ -1,17 +1,18 @@
 # SatelliteObserver
 
-Software for capturing data from CubeSat like satellites. 
+Software for capturing signal from satellites. The satellite is identified by [Catalog Number](https://en.wikipedia.org/wiki/Satellite_Catalog_Number).
 
 ## Instalation
 ### Dependencies
 
-* Boost (http://www.boost.org/doc/libs/1_55_0/doc/html/bbv2/installation.html)
+* [Boost](http://www.boost.org/doc/libs/1_55_0/doc/html/bbv2/installation.html)
 
-* MLAB-I2c-modules: https://github.com/MLAB-project/MLAB-I2c-modules
+* [Pymlab library](https://github.com/MLAB-project/pymlab)
 
 * GNURadio 3.7.5 or higher: http://gnuradio.org/redmine/projects/gnuradio/wiki/BuildGuide
 
 ### How to: NOAA decoder block 
+
 * Download the source.
 * Go to /sat-observer/gr-sat_observer:
 ```
@@ -33,9 +34,10 @@ Software for capturing data from CubeSat like satellites.
 
 
 ### How to: satellite-observer
-* Go to /sat-observer:
+
 ```
-    cd /your_download_directory/sat-observer  
+    git clone https://github.com/MLAB-project/satellite-observer.git
+    cd satellite-observer  
 ```
 * Make the build directory:
 ```
@@ -43,7 +45,7 @@ Software for capturing data from CubeSat like satellites.
 ```
 * Build the project:
 ```
-    cd /build
+    cd ./build
     cmake ..
 ```
 * Install:
@@ -57,7 +59,9 @@ Software for capturing data from CubeSat like satellites.
 
 
 ## Usage
+
 ###Configuration
+
 #### SpaceTrack account
 If you want to automatically download the TLE file you need an account on Space-Track:
 
@@ -120,13 +124,12 @@ A configuration file example (you must fill all):
 * Lat:
     * Latitude of station.
 * Long:
-    * Longitude of station.
+    * Longitude of the receiver station.
 * Hight:
     * Hight of station.
 * Hour:
-    * Your time zone **(of your operative system)**. For example, if you are in Spain in summer your time zone is: UTC/TMT +2. Then:  
-    
-        
+    * Your time zone **(of your receiver system)**. For example, if you are in Spain in summer your time zone is: UTC/TMT +2. Then:
+
             Hour = +2
         
 ### Running Satellite Observer

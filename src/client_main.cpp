@@ -38,7 +38,7 @@
 
 int main(int argc, char *argv[]){
     if(argc!=5){
-        std::cout << "Error. Use: /.client IP port satellite_number frequency.\n";
+        std::cout << "Error. Use: ./client IP port satellite_number frequency.\n";
         return -1;
     }
 
@@ -89,7 +89,7 @@ int main(int argc, char *argv[]){
     /********************************************************************************/
     /********************************** SEND PARAMETERS ****************************/
     /********************************************************************************/
-    //message = satellite_number|frquency&
+    //message = satellite_number|frequency&
     std::string message=satellite_number;
     message.insert(message.size(),"|");
     message.insert(message.size(),frequency);
